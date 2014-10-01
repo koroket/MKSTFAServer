@@ -11,17 +11,6 @@ var mongoUri = process.env.MONGOLAB_URI ||
   process.env.MONGOHQ_URL ||
   'mongodb://localhost/mydb';
 
-// mongo.Db.connect(mongoUri, function (err, db) {
-//   db.collection('mydocs', function(er, collection) {
-//     collection.insert({'mykey': 'myvalue'}, {safe: true}, function(er,rs) {
-//     });
-//   });
-// });
-
-
-
-
-
 var db = mongoskin.db(mongoUri, {safe:true})
 
 app.param('collectionName', function(req, res, next, collectionName){
@@ -29,8 +18,8 @@ app.param('collectionName', function(req, res, next, collectionName){
   return next()
 })
 
-app.get('/collections/candys', function(req, res) {
-  var collection = db.collection('mydocs')
+app.get('/collections/groups', function(req, res) {
+  var collection = db.collection('mydb')
 
   collection.find({} ,{}).toArray(function(e, results){
     if (e) res.status(500).send()
@@ -39,8 +28,8 @@ app.get('/collections/candys', function(req, res) {
 
 })
 
-app.post('/collections/candys', function(req, res) {
-  var collection = db.collection('mydocs')
+app.post('/collections/groups', function(req, res) {
+  var collection = db.collection('mydb')
 
   collection.insert(req.body, {}, function(e, results){
     if (e) res.status(500).send()
