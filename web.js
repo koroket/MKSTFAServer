@@ -1,10 +1,11 @@
-// web.js
-var express = require("express");
+var express = require('express'),
+  mongoskin = require('mongoskin'),
+  bodyParser = require('body-parser')
 var logfmt = require("logfmt");
 var mongo = require('mongodb');
 
-var app = express();
-app.use(logfmt.requestLogger());
+var app = express()
+app.use(bodyParser())
 
 var mongoUri = process.env.MONGOLAB_URI ||
   process.env.MONGOHQ_URL ||
@@ -17,8 +18,19 @@ mongo.Db.connect(mongoUri, function (err, db) {
   });
 });
 
+
+
+
+
+var db = mongoskin.db(mongoUri, {safe:true})
+
+app.param('collectionName', function(req, res, next, collectionName){
+  req.collection = db.collection(collectionName)
+  return next()
+})
+
 app.get('/collections/candys', function(req, res) {
-  var collection = mongo.db.collection("candy")
+  var collection = db.collection("candy")
 
   collection.find({} ,{}).toArray(function(e, results){
     if (e) res.status(500).send()
@@ -28,13 +40,14 @@ app.get('/collections/candys', function(req, res) {
 })
 
 app.post('/collections/candys', function(req, res) {
-  var collection = mongo.db.collection("candy")
+  var collection = db.collection("candy")
 
   collection.insert(req.body, {}, function(e, results){
     if (e) res.status(500).send()
     res.send(results) 
   })
 })
+
 
 
 var port = Number(process.env.PORT || 5000);

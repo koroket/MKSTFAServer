@@ -20,8 +20,10 @@
   },
   "homepage": "https://github.com/koroket/MKSTFA",
   "dependencies": {
+    "body-parser": "^1.9.0",
     "express": "^4.9.5",
     "logfmt": "^1.2.0",
-    "mongodb": "^1.4.17"
+    "mongodb": "^1.4.17",
+    "mongoskin": "^1.4.4"
   }
 }
