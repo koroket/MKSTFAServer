@@ -29,15 +29,15 @@ app.param('collectionName', function(req, res, next, collectionName){
   return next()
 })
 
-// app.get('/collections/candys', function(req, res) {
-//   var collection = db.collection('mydocs')
+app.get('/collections/candys', function(req, res) {
+  var collection = db.collection('mydocs')
 
-//   collection.find({} ,{}).toArray(function(e, results){
-//     if (e) res.status(500).send()
-//     res.send(results)
-//   })
+  collection.find({} ,{}).toArray(function(e, results){
+    if (e) res.status(500).send()
+    res.send(results)
+  })
 
-// })
+})
 
 app.post('/collections/candys', function(req, res) {
   var collection = db.collection('mydocs')
