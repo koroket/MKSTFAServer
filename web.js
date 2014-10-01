@@ -30,12 +30,7 @@ app.param('collectionName', function(req, res, next, collectionName){
 })
 
 app.get('/collections/candys', function(req, res) {
-  var collection = db.collection("candy")
-
-  collection.find({} ,{}).toArray(function(e, results){
-    if (e) res.status(500).send()
-    res.send(results)
-  })
+  res.send('hi')
 
 })
 
