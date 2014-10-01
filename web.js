@@ -30,7 +30,7 @@ app.param('collectionName', function(req, res, next, collectionName){
 })
 
 app.get('/collections/candys', function(req, res) {
-  var collection = db.collection("candy")
+  var collection = db.collection('mydocs')
 
   collection.find({} ,{}).toArray(function(e, results){
     if (e) res.status(500).send()
@@ -40,7 +40,7 @@ app.get('/collections/candys', function(req, res) {
 })
 
 app.post('/collections/candys', function(req, res) {
-  var collection = db.collection("candy")
+  var collection = db.collection('mydocs')
 
   collection.insert(req.body, {}, function(e, results){
     if (e) res.status(500).send()
