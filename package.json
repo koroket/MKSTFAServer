@@ -21,6 +21,7 @@
   "homepage": "https://github.com/koroket/MKSTFA",
   "dependencies": {
     "express": "^4.9.5",
-    "logfmt": "^1.2.0"
+    "logfmt": "^1.2.0",
+    "mongodb": "^1.4.17"
   }
 }
