@@ -28,6 +28,7 @@ app.get('/collections/groups', function(req, res) {
 
 })
 
+
 app.post('/collections/groups', function(req, res) {
   var collection = db.collection('mydb')
 
@@ -37,6 +38,27 @@ app.post('/collections/groups', function(req, res) {
   })
 })
 
+app.get('/collections/:collectionName/:id', function(req, res, next) {
+  req.collection.findById(req.params.id, function(e, result){
+    if (e) return next(e)
+    res.send(result)
+  })
+})
+
+app.put('/col/:collectionName/:id', function(req, res, next) {
+  req.collection.updateById(req.params.id, {$set: req.body}, {safe: true, multi: false}, function(e, result){
+    if (e) return next(e)
+    res.send((result === 1) ? {msg:'success'} : {msg: 'error'})
+  })
+})
+
+app.delete('/collections/:collectionName/:id', function(req, res, next) {
+  req.collection.removeById(req.params.id, function(e, result){
+    console.log(result)
+    if (e) return next(e)
+    res.send((result === 1)?{msg: 'success'} : {msg: 'error'})
+  })
+})
 
 
 var port = Number(process.env.PORT || 5000);
