@@ -17,8 +17,16 @@ app.param('collectionName', function(req, res, next, collectionName){
   req.collection = db.collection(collectionName)
   return next()
 })
+app.post('/:id', function(req, res) {
+  var collection = db.collection('mydb')
 
-app.get('/collections/groups', function(req, res) {
+  collection.insert(req.body, {}, function(e, results){
+    if (e) res.status(500).send()
+    res.send(results) 
+  })
+})
+
+app.get('/:id', function(req, res) {
   var collection = db.collection('mydb')
 
   collection.find({} ,{}).toArray(function(e, results){
@@ -29,7 +37,7 @@ app.get('/collections/groups', function(req, res) {
 })
 
 
-app.post('/collections/groups', function(req, res) {
+app.post('/groups', function(req, res) {
   var collection = db.collection('mydb')
 
   collection.insert(req.body, {}, function(e, results){
@@ -38,10 +46,12 @@ app.post('/collections/groups', function(req, res) {
   })
 })
 
-app.get('/collections/:collectionName/:id', function(req, res, next) {
-  req.collection.findById(req.params.id, function(e, result){
-    if (e) return next(e)
-    res.send(result)
+app.get('/groups/:id', function(req, res) {
+  var collection = db.collection('mydb')
+
+  collection.findById(req.params.id, function(e, result){
+    if (e) res.status(500).send()
+    res.send(results) 
   })
 })
 
