@@ -17,7 +17,7 @@ app.param('collectionName', function(req, res, next, collectionName){
   req.collection = db.collection(collectionName)
   return next()
 })
-app.post('/:friend', function(req, res) {
+app.post('/ppl/:friend', function(req, res) {
   var collection = db.collection(req.params.friend)
 
   collection.insert(req.body, {}, function(e, results){
@@ -26,7 +26,7 @@ app.post('/:friend', function(req, res) {
   })
 })
 
-app.get('/:friend', function(req, res) {
+app.get('/ppl/:friend', function(req, res) {
   var collection = db.collection(req.params.friend)
 
   collection.find({} ,{}).toArray(function(e, results){
