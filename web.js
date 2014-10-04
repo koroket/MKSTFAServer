@@ -27,7 +27,7 @@ app.post('/:friend', function(req, res) {
 })
 
 app.get('/:friend', function(req, res) {
-  var collection = db.collection('yeh')
+  var collection = db.collection(req.params.friend)
 
   collection.find({} ,{}).toArray(function(e, results){
     if (e) res.status(500).send()
