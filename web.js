@@ -44,10 +44,9 @@ app.get('/ppl/:friend', function(req, res) {
 
 })
 
-app.get('/yelp/:locationz', function(req, res) {
- 
+app.get('/yelp/:food/:location', function(req, res) {
   
-  yelp.search({term: "food", location: req.params.locationz}, function(error, data) {
+  yelp.search({term: "food", location: "Montreal"}, function(error, data) {
   if(error) res.status(500).send()
     res.send(data)
 });
