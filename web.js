@@ -44,11 +44,11 @@ app.get('/ppl/:friend', function(req, res) {
 
 })
 
-app.get('/yelp/:food/:location', function(req, res) {
+app.get('/yelp/:locationz/:food', function(req, res) {
   var collection = db.collection(req.params.friend)
 
   
-  yelp.search({term: "food", location: "Montreal"}, function(error, data) {
+  yelp.search({term: req.params.food, location: req.params.locationz}, function(error, data) {
   if(error) res.status(500).send()
     res.send(data)
 });
@@ -85,7 +85,7 @@ app.get('/groups/:id', function(req, res) {
   })
 })
 
-app.put('/col/:collectionName/:id', function(req, res, next) {
+app.put('/groups/:id', function(req, res, next) {
   req.collection.updateById(req.params.id, {$set: req.body}, {safe: true, multi: false}, function(e, result){
     if (e) return next(e)
     res.send((result === 1) ? {msg:'success'} : {msg: 'error'})
