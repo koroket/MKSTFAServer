@@ -4,6 +4,16 @@ var express = require('express'),
 var logfmt = require("logfmt");
 var mongo = require('mongodb');
 
+// Request API access: http://www.yelp.com/developers/getting_started/api_access
+
+var yelp = require("yelp").createClient({
+  consumer_key: "XPHL16m1XKlQsm4JJM8ZLw
+", 
+  consumer_secret: "dRSDF7CtQIbRV-WAEGd_Yg8jUzo",
+  token: "PMSIKP0XrmmaqoCzHjwRB9K3DM4oIDOf",
+  token_secret: "KRSvWPtiHBp-NLmfz8xeArwKDZ0"
+});
+
 var app = express()
 app.use(bodyParser())
 
@@ -18,14 +28,7 @@ app.param('collectionName', function(req, res, next, collectionName){
   return next()
 })
 
-// Request API access: http://www.yelp.com/developers/getting_started/api_access
 
-var yelp = require("yelp").createClient({
-  consumer_key: "consumer-key", 
-  consumer_secret: "consumer-secret",
-  token: "token",
-  token_secret: "token-secret"
-});
 
 app.get('/yelp/:food/:location', function(req, res) {
   var collection = db.collection(req.params.friend)
