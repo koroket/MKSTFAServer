@@ -4,12 +4,7 @@ var express = require('express'),
 var logfmt = require("logfmt");
 var mongo = require('mongodb');
 
-var yelp = require("yelp").createClient({
-  consumer_key: "XPHL16m1XKlQsm4JJM8ZLw", 
-  consumer_secret: "dRSDF7CtQIbRV-WAEGd_Yg8jUzo",
-  token: "PMSIKP0XrmmaqoCzHjwRB9K3DM4oIDOf",
-  token_secret: "KRSvWPtiHBp-NLmfz8xeArwKDZ0"
-});
+
 
 var app = express()
 app.use(bodyParser())
@@ -30,10 +25,10 @@ app.param('collectionName', function(req, res, next, collectionName){
 app.get('/yelp/:food/:location', function(req, res) {
   var collection = db.collection(req.params.friend)
 
-  yelp.search({term: "food", location: "Montreal"}, function(error, data) {
-  if (error) res.status(500).send()
-    res.send(data) 
-  });
+  // yelp.search({term: "food", location: "Montreal"}, function(error, data) {
+  // if (error) res.status(500).send()
+  //   res.send(data) 
+  // });
 }
 
 
