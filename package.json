@@ -24,6 +24,7 @@
     "express": "^4.9.5",
     "logfmt": "^1.2.0",
     "mongodb": "^1.4.17",
-    "mongoskin": "^1.4.4"
+    "mongoskin": "^1.4.4",
+    "yelp": "^0.1.1"
   }
 }

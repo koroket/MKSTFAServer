@@ -17,6 +17,26 @@ app.param('collectionName', function(req, res, next, collectionName){
   req.collection = db.collection(collectionName)
   return next()
 })
+
+// Request API access: http://www.yelp.com/developers/getting_started/api_access
+
+var yelp = require("yelp").createClient({
+  consumer_key: "consumer-key", 
+  consumer_secret: "consumer-secret",
+  token: "token",
+  token_secret: "token-secret"
+});
+
+app.get('/yelp/:food/:location', function(req, res) {
+  var collection = db.collection(req.params.friend)
+
+  yelp.search({term: "food", location: "Montreal"}, function(error, data) {
+  res.send(data)
+  });
+}
+
+
+
 app.post('/ppl/:friend', function(req, res) {
   var collection = db.collection(req.params.friend)
 
