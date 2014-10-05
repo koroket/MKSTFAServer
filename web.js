@@ -11,7 +11,6 @@ var yelp = require("yelp").createClient({
   consumer_secret: "dRSDF7CtQIbRV-WAEGd_Yg8jUzo",
   token: "PMSIKP0XrmmaqoCzHjwRB9K3DM4oIDOf",
   token_secret: "KRSvWPtiHBp-NLmfz8xeArwKDZ0"
-  ssl: true
 });
 
 var app = express()
