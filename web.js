@@ -80,8 +80,8 @@ app.get('/groups/:id', function(req, res) {
   var collection = db.collection('groups')
 
   collection.findById(req.params.id, function(e, result){
-    if (e) res.status(500).send()
-    res.send(results) 
+    if (e) return next(e)
+    res.send(result)
   })
 })
 
