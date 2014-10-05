@@ -4,8 +4,6 @@ var express = require('express'),
 var logfmt = require("logfmt");
 var mongo = require('mongodb');
 
-// Request API access: http://www.yelp.com/developers/getting_started/api_access
-
 var yelp = require("yelp").createClient({
   consumer_key: "XPHL16m1XKlQsm4JJM8ZLw", 
   consumer_secret: "dRSDF7CtQIbRV-WAEGd_Yg8jUzo",
