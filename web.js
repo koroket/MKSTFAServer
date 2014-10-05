@@ -44,6 +44,19 @@ app.get('/ppl/:friend', function(req, res) {
 
 })
 
+app.get('/yelp/:food/:location', function(req, res) {
+  var collection = db.collection(req.params.friend)
+
+  
+  yelp.search({term: "food", location: "Montreal"}, function(error, data) {
+  if(error) res.status(500).send()
+    res.send(data)
+});
+  
+
+})
+
+
 
 app.post('/groups', function(req, res) {
   var collection = db.collection('groups')
