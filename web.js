@@ -45,8 +45,7 @@ app.get('/ppl/:friend', function(req, res) {
 })
 
 app.get('/yelp/:locationz/:food', function(req, res) {
-  var collection = db.collection(req.params.friend)
-
+ 
   
   yelp.search({term: req.params.food, location: req.params.locationz}, function(error, data) {
   if(error) res.status(500).send()
