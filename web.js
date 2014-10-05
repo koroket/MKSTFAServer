@@ -92,8 +92,9 @@ app.put('/col/:collectionName/:id', function(req, res, next) {
   })
 })
 
-app.delete('/collections/:collectionName/:id', function(req, res, next) {
-  req.collection.removeById(req.params.id, function(e, result){
+app.delete('/groups/:id', function(req, res, next) {
+  var collection = db.collection('groups')
+  collection.removeById(req.params.id, function(e, result){
     console.log(result)
     if (e) return next(e)
     res.send((result === 1)?{msg: 'success'} : {msg: 'error'})
