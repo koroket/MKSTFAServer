@@ -70,9 +70,9 @@ app.post('/groups', function(req, res) {
 app.get('/groups', function(req, res) {
   var collection = db.collection('groups')
 
-  collection.findById(req.params.id, function(e, result){
+  collection.find({} ,{}).toArray(function(e, results){
     if (e) res.status(500).send()
-    res.send(results) 
+    res.send(results)
   })
 })
 
