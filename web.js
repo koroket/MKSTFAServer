@@ -4,8 +4,6 @@ var express = require('express'),
 var logfmt = require("logfmt");
 var mongo = require('mongodb');
 
-
-
 var app = express()
 app.use(bodyParser())
 
@@ -19,20 +17,6 @@ app.param('collectionName', function(req, res, next, collectionName){
   req.collection = db.collection(collectionName)
   return next()
 })
-
-
-
-app.get('/yelp/:food/:location', function(req, res) {
-  var collection = db.collection(req.params.friend)
-
-  // yelp.search({term: "food", location: "Montreal"}, function(error, data) {
-  // if (error) res.status(500).send()
-  //   res.send(data) 
-  // });
-}
-
-
-
 app.post('/ppl/:friend', function(req, res) {
   var collection = db.collection(req.params.friend)
 
