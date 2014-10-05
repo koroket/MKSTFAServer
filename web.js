@@ -78,7 +78,7 @@ app.get('/groups/:id', function(req, res) {
   var collection = db.collection('groups')
 
   collection.findById(req.params.id, function(e, result){
-    if (e) return next(e)
+    if (e) res.status(500).send()
     res.send(result)
   })
 })
