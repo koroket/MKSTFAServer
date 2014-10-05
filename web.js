@@ -44,10 +44,10 @@ app.get('/ppl/:friend', function(req, res) {
 
 })
 
-app.get('/yelp/:locationz/:food', function(req, res) {
+app.get('/yelp/:locationz', function(req, res) {
  
   
-  yelp.search({term: req.params.food, location: req.params.locationz}, function(error, data) {
+  yelp.search({term: "food", location: req.params.locationz}, function(error, data) {
   if(error) res.status(500).send()
     res.send(data)
 });
