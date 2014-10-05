@@ -61,9 +61,9 @@ app.get('/yelp/:food/:location', function(req, res) {
 app.post('/groups', function(req, res) {
   var collection = db.collection('groups')
 
-  collection.find({} ,{}).toArray(function(e, results){
+  collection.insert(req.body, {}, function(e, results){
     if (e) res.status(500).send()
-    res.send(results)
+    res.send(results) 
   })
 })
 
