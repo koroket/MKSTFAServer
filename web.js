@@ -88,7 +88,7 @@ app.put('/groups/:id', function(req, res, next) {
 
   collection.updateById(req.params.id, {$set:
     {
-      "done": ["hi","yeah"]
+      "done.0": "bye"
     }
   }, {safe: true, multi: false}, function(e, result){
     if (e) res.status(500).send()
