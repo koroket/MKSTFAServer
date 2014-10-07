@@ -85,8 +85,8 @@ app.get('/groups/:id', function(req, res) {
 
 app.put('/groups/:id', function(req, res, next) {
   req.collection.updateById(req.params.id, { done: "yes"}, {safe: true, multi: false}, function(e, result){
-    if (e) return next(e)
-    res.send((result === 1) ? {msg:'success'} : {msg: 'error'})
+    if (e) res.status(500).send()
+    res.send(result)
   })
 })
 
