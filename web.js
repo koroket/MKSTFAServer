@@ -84,7 +84,9 @@ app.get('/groups/:id', function(req, res) {
 })
 
 app.put('/groups/:id', function(req, res, next) {
-  req.collection.updateById(req.params.id, { done: "yes"}, {safe: true, multi: false}, function(e, result){
+  var collection = db.collection('groups')
+
+  collection.updateById(req.params.id, { done: "yes"}, {safe: true, multi: false}, function(e, result){
     if (e) res.status(500).send()
     res.send(result)
   })
