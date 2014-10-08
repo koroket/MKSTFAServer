@@ -102,7 +102,7 @@ var variable = str3.concat(str4);
     if (e) res.status(500).send()
     collection.findById(req.params.id, function(e2, result2){
       if (e2) res.status(500).send()
-      res.send(result2.myObjects[req.params.number].agree)
+      res.send(result2.myObjects[req.params.number])
     })
   })
 })
