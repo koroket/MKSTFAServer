@@ -100,7 +100,7 @@ var variable = str3.concat(str4);
     action
   }, {safe: true, multi: false}, function(e, result){
     if (e) res.status(500).send()
-    console.log(result)
+    res.send((result === 1)?result : {msg: 'error'})
   })
 })
 
