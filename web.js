@@ -100,9 +100,9 @@ var variable = str3.concat(str4);
     action
   }, {safe: true, multi: false}, function(e, result){
     if (e) res.status(500).send()
-    collection.findById(req.params.id, function(e, result){
-    if (e) res.status(500).send()
-    res.send(result)
+    collection.findById(req.params.id, function(e2, result2){
+    if (e2) res.status(500).send()
+    res.send(result2.myObjects)
   })
   })
 })
