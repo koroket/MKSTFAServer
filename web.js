@@ -85,11 +85,11 @@ app.get('/groups/:id', function(req, res) {
 
 app.put('/groups/:id', function(req, res, next) {
   var collection = db.collection('groups')
-var yep = "myObjects.1.agree";
+var variable = "myObjects.1.agree";
+ var action = {};
+ action[variable] = 1;
   collection.updateById(req.params.id, {$inc:
-    {
-      yep: 1
-    }
+    action
   }, {safe: true, multi: false}, function(e, result){
     if (e) res.status(500).send()
     res.send(result)
