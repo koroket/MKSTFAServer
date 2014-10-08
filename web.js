@@ -83,10 +83,18 @@ app.get('/groups/:id', function(req, res) {
   })
 })
 
-app.put('/groups/:id', function(req, res, next) {
+app.put('/groups/:id/:number', function(req, res, next) {
+
   var collection = db.collection('groups')
-var variable = "myObjects.1.agree";
+
+  var str1 = "myObjects.";
+  var str2 = req.params.number;
+  var str3 = str1.concat(str2);
+  var str4 = ".agree";
+
+var variable = str3.concat(str4);
  var action = {};
+
  action[variable] = 1;
   collection.updateById(req.params.id, {$inc:
     action
