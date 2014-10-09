@@ -114,7 +114,12 @@ app.delete('/groups/:id', function(req, res, next) {
     res.send((result === 1)?{msg: 'success'} : {msg: 'error'})
   })
 })
+app.delete('/ppl/:friend', function(req, res) {
+  var collection = db.collection(req.params.friend)
 
+  collection.remove({})
+
+})
 
 var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
