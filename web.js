@@ -79,7 +79,7 @@ app.get('/groups/:id', function(req, res) {
 
   collection.findById(req.params.id, function(e, result){
     if (e) res.status(500).send()
-    res.send(result)
+    res.send(result.myObjects)
   })
 })
 
@@ -102,7 +102,8 @@ var variable = str3.concat(str4);
     if (e) res.status(500).send()
     collection.findById(req.params.id, function(e2, result2){
       if (e2) res.status(500).send()
-      res.send(result2.myObjects[req.params.number])
+      res.send(result2.myObjects[req.params.number]
+        )
     })
   })
 })
