@@ -99,7 +99,8 @@ app.put('/groups/:id/:number', function(req, res, next) {
   }, {safe: true, multi: false}, function(e, result){
     if (e) res.status(500).send()
     collection.findById(req.params.id, function(e2, result2){
-      returnStr  = result2.Replies[req.params.number].toString();
+      returnStr  = result2.Replies[req.params.number];
+      if(returnStr==0)res.status(1000).send()
       if (e2) res.status(500).send()
       res.send(returnStr
         )
