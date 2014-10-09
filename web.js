@@ -117,7 +117,7 @@ app.delete('/groups/:id', function(req, res, next) {
 app.delete('/ppl/:friend/:id', function(req, res) {
   var collection = db.collection(req.params.friend)
 
-  collection.removeById(req.params.id, function(e, result){
+  collection.removeById('54308f13cecbb40200f07f48', function(e, result){
     console.log(result)
     if (e) return next(e)
     res.send((result === 1)?{msg: 'success'} : {msg: 'error'})
