@@ -101,7 +101,7 @@ app.put('/groups/:id/:number', function(req, res, next) {
     collection.findById(req.params.id, function(e2, result2){
       if (e2) res.status(500).send()
         console.log(result2.Replies[req.params.number]);
-      res.json(result2.Replies[req.params.number]
+      res.send({NumberOfReplies:result2.Replies[req.params.number] }
 
         )
     })
