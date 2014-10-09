@@ -87,12 +87,10 @@ app.put('/groups/:id/:number', function(req, res, next) {
 
   var collection = db.collection('groups')
 
-  var str1 = "myObjects.";
+  var str1 = "Replies.";
   var str2 = req.params.number;
-  var str3 = str1.concat(str2);
-  var str4 = ".agree";
-
-var variable = str3.concat(str4);
+  var variable = str1.concat(str2);
+  
  var action = {};
 
  action[variable] = 1;
@@ -102,7 +100,7 @@ var variable = str3.concat(str4);
     if (e) res.status(500).send()
     collection.findById(req.params.id, function(e2, result2){
       if (e2) res.status(500).send()
-      res.send(result2.myObjects[req.params.number]
+      res.send(result2.Replies[req.params.number]
         )
     })
   })
