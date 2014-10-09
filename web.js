@@ -90,7 +90,7 @@ app.put('/groups/:id/:number', function(req, res, next) {
   var str1 = "Replies.";
   var str2 = req.params.number;
   var variable = str1.concat(str2);
-  
+  var returnStr;
  var action = {};
 
  action[variable] = 1;
@@ -99,8 +99,9 @@ app.put('/groups/:id/:number', function(req, res, next) {
   }, {safe: true, multi: false}, function(e, result){
     if (e) res.status(500).send()
     collection.findById(req.params.id, function(e2, result2){
+      returnStr  = result2.Replies[req.params.number].toString();
       if (e2) res.status(500).send()
-      res.send(result2.Replies
+      res.send(returnStr
         )
     })
   })
