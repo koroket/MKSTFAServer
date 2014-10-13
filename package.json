@@ -32,10 +32,6 @@
 
     "mongodbUrl": "mongodb://username:password@localhost/database",
 
-    "gcm": {
-        "apiKey": "YOUR_API_KEY_HERE"
-    },
-
     "apn": {
         "connection": {
             "gateway": "gateway.sandbox.push.apple.com",
