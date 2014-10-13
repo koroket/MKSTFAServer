@@ -44,9 +44,9 @@ app.get('/ppl/:friend', function(req, res) {
 
 })
 
-app.get('/yelp/:location/:search', function(req, res) {
+app.get('/yelp/:location/:search/:mynum', function(req, res) {
   
-  yelp.search({limit: 10, location: req.params.location}, function(error, data) {
+  yelp.search({limit: req.params.mynum, location: req.params.location, term:req.params.search}, function(error, data) {
   if(error) res.status(500).send()
     res.send(data)
 });
