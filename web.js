@@ -86,7 +86,7 @@ app.post('/groups', function(req, res) {
     res.send(results) 
   })
 })
-app.get('/token/:token', function(req, res) {
+app.get('/token/push/:token', function(req, res) {
   var myDevice = new apn.Device(req.params.token);
 
     var note = new apn.Notification();
