@@ -3,13 +3,17 @@ var express = require('express'),
   bodyParser = require('body-parser')
 var logfmt = require("logfmt");
 var mongo = require('mongodb');
-
+var apn = require('apn');
 var yelp = require("yelp").createClient({
   consumer_key: "XPHL16m1XKlQsm4JJM8ZLw", 
   consumer_secret: "dRSDF7CtQIbRV-WAEGd_Yg8jUzo",
   token: "PMSIKP0XrmmaqoCzHjwRB9K3DM4oIDOf",
   token_secret: "KRSvWPtiHBp-NLmfz8xeArwKDZ0"
 });
+
+var options = { };
+
+var apnConnection = new apn.Connection(options);
 
 var app = express()
 app.use(bodyParser())
