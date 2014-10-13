@@ -86,7 +86,7 @@ app.post('/groups', function(req, res) {
     res.send(results) 
   })
 })
-app.get('/token/push/:token', function(req, res) {
+app.get('/token/push/:token/:daname', function(req, res) {
   var myDevice = new apn.Device(req.params.token);
 
     var note = new apn.Notification();
@@ -94,8 +94,8 @@ app.get('/token/push/:token', function(req, res) {
 note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
 note.badge = 3;
 note.sound = "ping.aiff";
-note.alert = "\uD83D\uDCE7 \u2709 You have a new message";
-note.payload = {'messageFrom': 'Caroline'};
+note.alert = "\uD83D\uDCE7 \u2709 You have a new group invite";
+note.payload = {'messageFrom': req.params.daname};
 
 apnConnection.pushNotification(note, myDevice);
 })
