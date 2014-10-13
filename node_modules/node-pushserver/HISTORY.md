@@ -1,0 +1,12 @@
+## History
+- 0.5.2 : added sendBatch API method
+- 0.5.0 : refactored nearly from scratch. new everything.
+- 0.3.4 : new repo (git@github.com:smile-mobile/cordovapush-server.git), install from zipball and tarball is not supported anymore, adding MIT license
+- 0.3.3 : lot of doc fixes
+- 0.3.2 : add docs, 404, redirection and improve web interface (issue #21, issue #22, issue #23)
+- 0.3.1 : copy of node_modules (issue #9) + fix wrench issue
+- 0.3.0 : new and start commands (issue #8)
+- 0.2.2 : refactoring lib and config folders (issue #6 and #7)
+- 0.2.1 : fix issue #1 and issue #3
+- 0.2.0 : gcm + full server rewrite + bin
+- 0.1.0 : init
