@@ -107,7 +107,29 @@ app.put('/groups/:id/:number', function(req, res, next) {
     })
   })
 })
+app.put('/groups/:id/:number/finished', function(req, res, next) {
 
+  var collection = db.collection('groups')
+
+  var str1 = "Done";
+
+  
+ var action = {};
+
+ action[variable] = req.params.number;
+  collection.updateById(req.params.id, {$set:
+    action
+  }, {safe: true, multi: false}, function(e, result){
+    if (e) res.status(500).send()
+    collection.findById(req.params.id, function(e2, result2){
+      if (e2) res.status(500).send()
+        console.log(result2.Replies[req.params.number]);
+      res.send({NumberOfReplies:result2.Replies[req.params.number] }
+
+        )
+    })
+  })
+})
 app.delete('/groups/:id', function(req, res, next) {
   var collection = db.collection('groups')
   collection.removeById(req.params.id, function(e, result){
