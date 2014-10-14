@@ -127,7 +127,7 @@ app.get('/groups/:id', function(req, res) {
 
   collection.findById(req.params.id, function(e, result){
     if (e) res.status(500).send()
-    res.send(result.Objects)
+    res.send(result)
   })
 })
 
