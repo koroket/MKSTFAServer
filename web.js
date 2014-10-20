@@ -106,8 +106,10 @@ app.get('/google/:search', function(req, res) {
     };
 
     googlePlaces.placeSearch(parameters, function (response) {
-    res.send(response)
-    });
+  googlePlaces.placeDetailsRequest({reference:response.results[0].reference}, function (response) {
+    res.send(response.result)
+  });
+});
   
 
 })
