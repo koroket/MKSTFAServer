@@ -10,6 +10,9 @@ var yelp = require("yelp").createClient({
   token: "PMSIKP0XrmmaqoCzHjwRB9K3DM4oIDOf",
   token_secret: "KRSvWPtiHBp-NLmfz8xeArwKDZ0"
 });
+var GooglePlaces = require("googleplaces");
+var googlePlaces = new GooglePlaces("AIzaSyC5p7KH-SOmf2dgYFMqFm9H1vYAXX0jcMs", "json");
+
 
 var options = { };
 
@@ -89,6 +92,25 @@ app.get('/yelp/:location/:search/:mynum', function(req, res) {
 
 })
 
+
+app.get('/google/:search', function(req, res) {
+  
+/**
+ * Place search - https://developers.google.com/places/documentation/#PlaceSearchRequests
+ */
+    var parameters;
+
+    parameters = {
+        location:[-33.8670522, 151.1957362],
+        types: req.params.search
+    };
+
+    googlePlaces.placeSearch(parameters, function (response) {
+    console.log(response.results);
+    });
+  
+
+})
 
 
 app.post('/groups', function(req, res) {
