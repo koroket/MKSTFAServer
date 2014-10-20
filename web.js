@@ -105,9 +105,10 @@ app.get('/google/:search', function(req, res) {
         types: req.params.search
     };
 
-    googlePlaces.placeSearch(parameters, function (response) {
-    console.log(response.results);
-    });
+    googlePlaces.placeSearch(parameters, function(error, data) {
+    if(error) res.status(500).send()
+    res.send(data)
+});
   
 
 })
