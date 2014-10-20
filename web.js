@@ -53,7 +53,7 @@ app.post('/token/:friend', function(req, res) {
  
      collection.insert(req.body, {}, function(e, results){
     if (e) res.status(500).send()
-    res.send(collection) 
+    res.send('hi') 
     })
   
 })
