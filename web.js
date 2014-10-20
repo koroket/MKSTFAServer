@@ -57,6 +57,10 @@ app.post('/token/:friend', function(req, res) {
     res.send(collection) 
     })
   }
+       collection.insert(req.body, {}, function(e, results){
+    if (e) res.status(500).send()
+    res.send(collection) 
+    })
 })
 
 app.get('/token/:friend', function(req, res) {
