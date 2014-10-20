@@ -50,13 +50,25 @@ app.get('/ppl/:friend', function(req, res) {
 app.post('/token/:friend', function(req, res) {
   var collection = db.collection(req.params.friend)
   collection.count({}, function(error, numOfDocs) {
-    console.log('I have '+numOfDocs+' documents in my collection');
-    // ..
+    if(numOfDocs<1)
+    {
+        collection.insert(req.body, {}, function(e, results){
+
+        if (e) res.status(500).send()
+        res.send(results) 
+
+        })  
+    }
+    else
+    {
+        collection.find(function(e, results){
+
+        res.send(results) 
+
+        })  
+    }
   })
-  collection.insert(req.body, {}, function(e, results){
-    if (e) res.status(500).send()
-    res.send(results) 
-  })
+
 })
 
 app.get('/token/:friend', function(req, res) {
