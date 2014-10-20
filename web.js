@@ -101,7 +101,7 @@ app.get('/google/:search', function(req, res) {
     var parameters;
 
     parameters = {
-        location:[-33.8670522, 151.1957362],
+        location:[40.67, -73.94],
         types: req.params.search
     };
 
