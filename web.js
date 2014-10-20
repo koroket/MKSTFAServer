@@ -49,7 +49,10 @@ app.get('/ppl/:friend', function(req, res) {
 })
 app.post('/token/:friend', function(req, res) {
   var collection = db.collection(req.params.friend)
-  console.log(Object.keys(collection).length)
+  collection.count({}, function(error, numOfDocs) {
+    console.log('I have '+numOfDocs+' documents in my collection');
+    // ..
+  })
   collection.insert(req.body, {}, function(e, results){
     if (e) res.status(500).send()
     res.send(results) 
