@@ -49,10 +49,10 @@ app.get('/ppl/:friend', function(req, res) {
 })
 app.post('/token/:friend', function(req, res) {
   var collection = db.collection(req.params.friend)
-  console.log(collection.length)
+  console.log(Object.keys(collection).length)
   collection.insert(req.body, {}, function(e, results){
     if (e) res.status(500).send()
-    res.send(collection) 
+    res.send(results) 
   })
 })
 
