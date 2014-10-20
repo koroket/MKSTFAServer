@@ -61,11 +61,9 @@ app.post('/token/:friend', function(req, res) {
     }
     else
     {
-        collection.find(function(e, results){
-
-        res.send(results) 
-
-        })  
+        collection.find().toArray(function(err, docs) {
+        res.send(docs);
+        });
     }
   })
 
