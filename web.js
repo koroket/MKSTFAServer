@@ -136,7 +136,7 @@ note.payload = {'messageFrom': req.params.daname, 'type': "message"};
 
 apnConnection.pushNotification(note, myDevice);
 })
-app.get('/token/push/:token/:daindex/:groupid', function(req, res) {
+app.post('/token/push/:token/:daindex/:groupid', function(req, res) {
   var myDevice = new apn.Device(req.params.token);
 
     var note = new apn.Notification();
