@@ -145,7 +145,7 @@ note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
 note.badge = 3;
 note.sound = "ping.aiff";
 note.alert = "\uD83D\uDCE7 \u2709 You have a new group invite";
-note.payload = {'messageFrom': req.params.daname, 'groupid':req.params.groupid, 'index':req.params.daindex, 'type': "completion"};
+note.payload = req.body;
 
 apnConnection.pushNotification(note, myDevice);
 })
