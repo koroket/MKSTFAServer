@@ -168,10 +168,10 @@ app.get('/groups/:id', function(req, res) {
   })
 })
 
-app.put('/groups/:id/:number/:selfID', function(req, res, next) {
+app.put('/groups/:id/:number/:selfID/:friend', function(req, res, next) {
 
   var collection = db.collection('groups')
-  var collection2 = db.collection(req.params.selfID);
+  var collection2 = db.collection(req.params.friend);
 
   var str1 = "Replies.";
   var str2 = req.params.number;
