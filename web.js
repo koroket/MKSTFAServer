@@ -185,11 +185,7 @@ app.put('/groups/:id/:number/:selfID', function(req, res, next) {
     if (e) res.status(500).send()
     collection.findById(req.params.id, function(e2, result2){
       if (e2) res.status(500).send()
-      var collection2 = db.collection(req.params.selfID);
-      collection2.updateById(req.params.selfID,{$inc:{"currentIndex": 1}},{safe: true, multi: false}, function(e3, result){
 
-      })
-      if(e3) res.status(500).send()
       res.send({NumberOfReplies:result2.Replies[req.params.number]})
     })
   })
