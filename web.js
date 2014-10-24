@@ -191,7 +191,7 @@ app.put('/groups/:id/:number/:selfID/:friend/:numppl', function(req, res, next) 
           if(result2.Replies[req.params.number]==req.params.numppl){
             console.log(result2.Replies[req.params.number])
             console.log(req.params.numppl)
-            console.log(yes)
+            console.log("yes")
           }
           else{
             console.log(result2.Replies[req.params.number])
