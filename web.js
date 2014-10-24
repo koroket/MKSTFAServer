@@ -189,10 +189,12 @@ app.put('/groups/:id/:number/:selfID/:friend', function(req, res, next) {
       collection2.updateById(req.params.selfID,{$inc:{"currentIndex": 1}},{safe: true, multi: false}, function(e3, result3){
          if(e3) res.status(500).send()
           if(result2.Replies[req.params.number]==result3.number){
-            console.log("yeah")
+            console.log(result2.Replies[req.params.number])
+            console.log(result3.number)
           }
           else{
-            console.log("no")
+            console.log(result2.Replies[req.params.number])
+            console.log(result3.number)
           }
          res.send({NumberOfReplies:result2.Replies[req.params.number]})
       })
