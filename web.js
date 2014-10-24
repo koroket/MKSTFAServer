@@ -168,7 +168,7 @@ app.get('/groups/:id', function(req, res) {
   })
 })
 
-app.put('/groups/:id/:number/:selfID/:friend', function(req, res, next) {
+app.put('/groups/:id/:number/:selfID/:friend/:numppl', function(req, res, next) {
 
   var collection = db.collection('groups')
   var collection2 = db.collection(req.params.friend);
@@ -188,13 +188,14 @@ app.put('/groups/:id/:number/:selfID/:friend', function(req, res, next) {
       if (e2) res.status(500).send()
       collection2.updateById(req.params.selfID,{$inc:{"currentIndex": 1}},{safe: true, multi: false}, function(e3, result3){
          if(e3) res.status(500).send()
-          if(result2.Replies[req.params.number]==result3.number){
+          if(result2.Replies[req.params.number]==req.params.numppl){
             console.log(result2.Replies[req.params.number])
-            console.log(result3.number)
+            console.log(numppl)
+            console.log(yes)
           }
           else{
             console.log(result2.Replies[req.params.number])
-            console.log(result3.number)
+            console.log(numppl)
           }
          res.send({NumberOfReplies:result2.Replies[req.params.number]})
       })
