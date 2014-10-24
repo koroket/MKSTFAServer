@@ -192,6 +192,20 @@ app.put('/groups/:id/:number/:selfID/:friend/:numppl', function(req, res, next) 
             console.log(result2.Replies[req.params.number])
             console.log(req.params.numppl)
             console.log("yes")
+            for (var i = 0; i < result2.Tokens.length; i++) {
+                  console.log(i)
+                  var myDevice = new apn.Device(result2.Tokens[i]);
+
+                  var note = new apn.Notification();
+
+                  note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+                  note.badge = 3;
+                  note.sound = "ping.aiff";
+                  note.alert = "\uD83D\uDCE7 \u2709 You have a new group invite";
+                  note.payload = result2.Objects[req.params.number];
+
+                  apnConnection.pushNotification(note, myDevice);
+            }
           }
           else{
             console.log(result2.Replies[req.params.number])
