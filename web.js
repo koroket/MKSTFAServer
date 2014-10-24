@@ -190,12 +190,12 @@ app.put('/groups/:id/:number/:selfID/:friend/:numppl', function(req, res, next) 
          if(e3) res.status(500).send()
           if(result2.Replies[req.params.number]==req.params.numppl){
             console.log(result2.Replies[req.params.number])
-            console.log(numppl)
+            console.log(req.params.numppl)
             console.log(yes)
           }
           else{
             console.log(result2.Replies[req.params.number])
-            console.log(numppl)
+            console.log(req.params.numppl)
           }
          res.send({NumberOfReplies:result2.Replies[req.params.number]})
       })
