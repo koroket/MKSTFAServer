@@ -84,7 +84,7 @@ app.get('/token/:friend', function(req, res) {
 
 app.get('/yelp/:location/:search/:mynum', function(req, res) {
   
-  yelp.search({limit: req.params.mynum, location: req.params.location, term:req.params.search}, function(error, data) {
+  yelp.search({limit: req.params.mynum, ll:37.788022,-122.399797, term:req.params.search}, function(error, data) {
   if(error) res.status(500).send()
     res.send(data)
 });
@@ -133,19 +133,6 @@ note.badge = 0;
 note.sound = "ping.aiff";
 note.alert = "\uD83D\uDCE7 \u2709 You have a new group invite";
 note.payload = {'messageFrom': req.params.daname, 'type': "message"};
-
-apnConnection.pushNotification(note, myDevice);
-})
-app.post('/token/push/:token/:daindex/:groupid', function(req, res) {
-  var myDevice = new apn.Device(req.params.token);
-
-    var note = new apn.Notification();
-
-note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
-note.badge = 3;
-note.sound = "ping.aiff";
-note.alert = "\uD83D\uDCE7 \u2709 You have a new group invite";
-note.payload = req.body;
 
 apnConnection.pushNotification(note, myDevice);
 })
