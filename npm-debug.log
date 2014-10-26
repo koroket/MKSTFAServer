@@ -1,13 +1,9 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'node',
-1 verbose cli   '/usr/local/bin/npm',
-1 verbose cli   'install',
-1 verbose cli   'node-pushserver',
-1 verbose cli   '-g' ]
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'easynexmo', '-g' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.32
-4 verbose cache add [ 'node-pushserver', null ]
-5 verbose cache add name=undefined spec="node-pushserver" args=["node-pushserver",null]
+4 verbose cache add [ 'easynexmo', null ]
+5 verbose cache add name=undefined spec="easynexmo" args=["easynexmo",null]
 6 verbose parsed url { protocol: null,
 6 verbose parsed url   slashes: null,
 6 verbose parsed url   auth: null,
@@ -17,114 +13,103 @@
 6 verbose parsed url   hash: null,
 6 verbose parsed url   search: null,
 6 verbose parsed url   query: null,
-6 verbose parsed url   pathname: 'node-pushserver',
-6 verbose parsed url   path: 'node-pushserver',
-6 verbose parsed url   href: 'node-pushserver' }
-7 silly lockFile 6a1e425a-node-pushserver node-pushserver
-8 verbose lock node-pushserver /Users/mikebando/.npm/6a1e425a-node-pushserver.lock
-9 silly lockFile 6a1e425a-node-pushserver node-pushserver
-10 silly lockFile 6a1e425a-node-pushserver node-pushserver
-11 verbose addNamed [ 'node-pushserver', '' ]
+6 verbose parsed url   pathname: 'easynexmo',
+6 verbose parsed url   path: 'easynexmo',
+6 verbose parsed url   href: 'easynexmo' }
+7 silly lockFile bbec629c-easynexmo easynexmo
+8 verbose lock easynexmo /Users/mikebando/.npm/bbec629c-easynexmo.lock
+9 silly lockFile bbec629c-easynexmo easynexmo
+10 silly lockFile bbec629c-easynexmo easynexmo
+11 verbose addNamed [ 'easynexmo', '' ]
 12 verbose addNamed [ null, '*' ]
-13 silly lockFile cfe10e59-node-pushserver node-pushserver@
-14 verbose lock node-pushserver@ /Users/mikebando/.npm/cfe10e59-node-pushserver.lock
-15 silly addNameRange { name: 'node-pushserver', range: '*', hasData: false }
-16 verbose request where is /node-pushserver
+13 silly lockFile 75e9b1fe-easynexmo easynexmo@
+14 verbose lock easynexmo@ /Users/mikebando/.npm/75e9b1fe-easynexmo.lock
+15 silly addNameRange { name: 'easynexmo', range: '*', hasData: false }
+16 verbose request where is /easynexmo
 17 verbose request registry https://registry.npmjs.org/
-18 verbose request id e5f2e4cbd4bc55ac
-19 verbose url raw /node-pushserver
-20 verbose url resolving [ 'https://registry.npmjs.org/', './node-pushserver' ]
-21 verbose url resolved https://registry.npmjs.org/node-pushserver
-22 verbose request where is https://registry.npmjs.org/node-pushserver
-23 info trying registry request attempt 1 at 11:02:00
-24 http GET https://registry.npmjs.org/node-pushserver
-25 http 200 https://registry.npmjs.org/node-pushserver
+18 verbose request id fdc40956fdd272d3
+19 verbose url raw /easynexmo
+20 verbose url resolving [ 'https://registry.npmjs.org/', './easynexmo' ]
+21 verbose url resolved https://registry.npmjs.org/easynexmo
+22 verbose request where is https://registry.npmjs.org/easynexmo
+23 info trying registry request attempt 1 at 00:47:47
+24 http GET https://registry.npmjs.org/easynexmo
+25 http 200 https://registry.npmjs.org/easynexmo
 26 silly registry.get cb [ 200,
-26 silly registry.get   { date: 'Mon, 13 Oct 2014 18:02:01 GMT',
-26 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
-26 silly registry.get     etag: '"1TNJFHVSYS2U87X2STIAL6AXQ"',
+26 silly registry.get   { date: 'Sun, 26 Oct 2014 07:47:47 GMT',
+26 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R14B04)',
+26 silly registry.get     etag: '"ILOVNRX5596YHWDPTYLQ80RL"',
 26 silly registry.get     'content-type': 'application/json',
 26 silly registry.get     'cache-control': 'max-age=60',
-26 silly registry.get     'content-length': '41261',
+26 silly registry.get     'content-length': '10564',
 26 silly registry.get     'accept-ranges': 'bytes',
 26 silly registry.get     via: '1.1 varnish',
 26 silly registry.get     age: '0',
-26 silly registry.get     'x-served-by': 'cache-sjc3130-SJC',
+26 silly registry.get     'x-served-by': 'cache-lax1432-LAX',
 26 silly registry.get     'x-cache': 'MISS',
 26 silly registry.get     'x-cache-hits': '0',
-26 silly registry.get     'x-timer': 'S1413223321.166486,VS0,VE33',
+26 silly registry.get     'x-timer': 'S1414309667.641368,VS0,VE83',
 26 silly registry.get     vary: 'Accept',
 26 silly registry.get     'keep-alive': 'timeout=10, max=50',
 26 silly registry.get     connection: 'Keep-Alive' } ]
-27 silly addNameRange number 2 { name: 'node-pushserver', range: '*', hasData: true }
-28 silly addNameRange versions [ 'node-pushserver', [ '0.5.0', '0.5.1', '0.5.2', '0.5.3' ] ]
-29 verbose addNamed [ 'node-pushserver', '0.5.3' ]
-30 verbose addNamed [ '0.5.3', '0.5.3' ]
-31 silly lockFile 10355a4b-node-pushserver-0-5-3 node-pushserver@0.5.3
-32 verbose lock node-pushserver@0.5.3 /Users/mikebando/.npm/10355a4b-node-pushserver-0-5-3.lock
-33 silly lockFile 53c59d87-server-node-pushserver-0-5-3-tgz https://registry.npmjs.org/node-pushserver/-/node-pushserver-0.5.3.tgz
-34 verbose lock https://registry.npmjs.org/node-pushserver/-/node-pushserver-0.5.3.tgz /Users/mikebando/.npm/53c59d87-server-node-pushserver-0-5-3-tgz.lock
-35 verbose addRemoteTarball [ 'https://registry.npmjs.org/node-pushserver/-/node-pushserver-0.5.3.tgz',
-35 verbose addRemoteTarball   'b65df0ba98a89d7851b72e797926033d1babf7d3' ]
-36 info retry fetch attempt 1 at 11:02:01
-37 verbose fetch to= /var/folders/hl/2qp3j2m91fz5r6qhtmsz9xlr0000gn/T/npm-48721-dnvopun6/registry.npmjs.org/node-pushserver/-/node-pushserver-0.5.3.tgz
-38 http GET https://registry.npmjs.org/node-pushserver/-/node-pushserver-0.5.3.tgz
-39 http 200 https://registry.npmjs.org/node-pushserver/-/node-pushserver-0.5.3.tgz
-40 silly lockFile 53c59d87-server-node-pushserver-0-5-3-tgz https://registry.npmjs.org/node-pushserver/-/node-pushserver-0.5.3.tgz
-41 silly lockFile 53c59d87-server-node-pushserver-0-5-3-tgz https://registry.npmjs.org/node-pushserver/-/node-pushserver-0.5.3.tgz
-42 silly lockFile 10355a4b-node-pushserver-0-5-3 node-pushserver@0.5.3
-43 silly lockFile 10355a4b-node-pushserver-0-5-3 node-pushserver@0.5.3
-44 silly lockFile cfe10e59-node-pushserver node-pushserver@
-45 silly lockFile cfe10e59-node-pushserver node-pushserver@
-46 silly resolved [ { name: 'node-pushserver',
-46 silly resolved     version: '0.5.3',
-46 silly resolved     description: 'Cross-plateform Push Notifications. A project providing a generic API to push messages using Apple\'s APN and Google\'s GCM services.',
-46 silly resolved     keywords: [ 'push', 'gcm', 'apn', 'mongodb' ],
-46 silly resolved     dependencies:
-46 silly resolved      { mongoose: '~3.6.11',
-46 silly resolved        'node-gcm': '~0.9.6',
-46 silly resolved        lodash: '~1.3.1',
-46 silly resolved        apn: '~1.3.4',
-46 silly resolved        express: '~3.2.6',
-46 silly resolved        commander: '~1.2.0' },
-46 silly resolved     bin: { pushserver: './bin/pushserver.js' },
-46 silly resolved     main: './lib/PushController.js',
-46 silly resolved     scripts:
-46 silly resolved      { start: 'node ./bin/pushserver.js',
-46 silly resolved        test: 'echo "Error: no test specified" && exit 1' },
-46 silly resolved     repository:
-46 silly resolved      { type: 'git',
-46 silly resolved        url: 'git://github.com/Smile-SA/node-pushserver.git' },
-46 silly resolved     bugs: { url: 'https://github.com/Smile-SA/node-pushserver/issues' },
-46 silly resolved     readme: '# Push Server\n\nPush Server is a cross-plateform push server based on [node-apn](https://github.com/argon/node-apn) and [node-gcm](https://github.com/ToothlessGear/node-gcm). Push Server currently supports iOS (APN) and android (GCM) platforms. It uses mongoDB to store the push tokens. \nNote that this server is not meant to be used as a front facing server as there\'s no particular security implemented.\n\n\n## Getting started\n\n### 1 - Database\n\nnode-pushserver uses mongodb to store the user / token associations. So you need to have a Mongo database setup beforehand\n\nSee MongoDB ([MongoDB Download page](http://www.mongodb.org/downloads)).\n\n\n### 2 - Install node-pushserver\n+ From npm directly:\n\n```shell\n$ npm install node-pushserver -g\n```\n\n+ From git:\n\n```shell\n$ git clone git://github.com/Smile-SA/node-pushserver.git\n$ cd node-pushserver\n$ npm install -g\n```\n\n### 3 - Configuration\n\nIf you checked out this project from github, you can find a configuration file example named \'example.config.json\'.\n\n\n```js\n{\n\t"webPort": 8000,\n\n    "mongodbUrl": "mongodb://username:password@localhost/database",\n\n    "gcm": {\n        "apiKey": "YOUR_API_KEY_HERE"\n    },\n\n    "apn": {\n        "connection": {\n            "gateway": "gateway.sandbox.push.apple.com",\n            "cert": "/path/to/cert.pem",\n            "key": "/path/to/key.pem"\n        },\n        "feedback": {\n            "address": "feedback.sandbox.push.apple.com",\n            "cert": "/path/to/cert.pem",\n            "key": "/path/to/key.pem",\n            "interval": 43200,\n            "batchFeedback": true\n        }\n    }\n}\n\n```\n\n+ Checkout [GCM documentation](http://developer.android.com/guide/google/gcm/gs.html) to get your API key.\n\n+  Read [Apple\'s Notification guide](https://developer.apple.com/library/ios/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Introduction.html) to know how to get your certificates for APN.\n\n+ Please refer to node-apn\'s [documentation](https://github.com/argon/node-apn) to see all the available parameters and find how to convert your certificates into the expected format. \n\n\n### 4 - Start server\n\n```shell\n$ pushserver -c /path/to/config.json\n```\n\n### 5 - Enjoy!\n\n\n\n## Usage\n### Web Interface\nYou can easily send push messages using the web interface available at `http://domain:port/`.\n\n### Web API\n\n#### Send a push\n```\nhttp://domain:port/send (POST)\n```\n+ The content-type must be \'application/json\'.\n+ Format : \n\n```json\n{\n  "users": ["user1"],\n  "android": {\n    "collapseKey": "optional",\n    "data": {\n      "message": "Your message here"\n    }\n  },\n  "ios": {\n    "badge": 0,\n    "alert": "Your message here",\n    "sound": "soundName"\n  }\n}\n```\n\n+ "users" is optionnal, but must be an array if set. If not defined, the push message will be sent to every user (filtered by target).\n+ You can send push messages to Android or iOS devices, or both, by using the "android" and "ios" fields with appropriate options. See GCM and APN documentation to find the available options. \n\n#### Send push notifications\n```\nhttp://domain:port/sendBatch (POST)\n```\n+ The content-type must be \'application/json\'.\n+ Format : \n\n```json\n{\n  "notifications": [{\n      "users": ["user1", "user2"],\n      "android": {\n        "collapseKey": "optional",\n        "data": {\n          "message": "Your message here"\n        }\n      },\n      "ios": {\n        "badge": 0,\n        "alert": "Foo bar",\n        "sound": "soundName"\n      }\n    },{\n      "users": ["user4"],\n      "android": {\n        "collapseKey": "optional",\n        "data": {\n          "message": "Your other message here"\n        }\n      }\n    }\n  ]\n}\n```\n\n\n#### Subscribe\n```\nhttp://domain:port/subscribe (POST)\n```\n+ The content-type must be \'application/json\'.\n+ Format:\n```js\n{\n  "user":"user1",\n  "type":"android",\n  "token":"CAFEBABE"\n}\n```\n+ All field are required\n+ "type" can be either "android" or "ios"\n+ A user can be linked to several devices and a device can be linked to serveral users.\n\n#### Unsubscribe\n```\nhttp://domain:port/unsubscribe (POST)\n```\n+ The content-type must be \'application/json\'.\n+ Format:\n```js\n{\n  "token":"CAFEBABE"\n}\n```\nor\n```js\n{\n  "user":"user1"\n}\n```\n\n+ You can unsubscribe either a particular device, or all the devices for one user\n\n#### List Users\n```\nhttp://domain:port/users (GET)\n```\n+ Response format: \n```js\n{\n    "users": [\n        "vilem"\n    ]\n}\n```\n\n#### List user\'s associations\n```\nhttp://domain:port/users/{user}/associations (GET)\n```\n+ Response format\n\n```js\n{\n    "associations": [\n        {\n            "user": "vilem",\n            "type": "ios",\n            "token": "06546b81450fc50fb3e26e513081f54642d7af3dedb57d9a4c557cc36a81dd252"\n        }\n    ]\n}\n```\n\n\n## Dependencies\n\n  * [node-apn](https://github.com/argon/node-apn)\n  * [node-gcm](https://github.com/ToothlessGear/node-gcm)\n  * [express](https://github.com/visionmedia/express)\n  * [mongoose](https://github.com/LearnBoost/mongoose)\n  * [lodash](https://github.com/bestiejs/lodash.git )\n  * [commander](https://github.com/visionmedia/commander.js)\n\n## Tags\n[node-pushserver tags](https://github.com/Smile-SA/node-pushserver/tags).\n\n## History/Changelog\n\nTake a look at the [history](https://github.com/Smile-SA/node-pushserver/blob/master/HISTORY.md#history).\n\n## License\n\nMIT :\n\nCopyright (C) 2012 Smile Mobile Team\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n',
-46 silly resolved     readmeFilename: 'README.md',
-46 silly resolved     _id: 'node-pushserver@0.5.3',
+27 silly addNameRange number 2 { name: 'easynexmo', range: '*', hasData: true }
+28 silly addNameRange versions [ 'easynexmo',
+28 silly addNameRange   [ '0.2.0', '0.3.0', '0.3.1', '0.3.2', '0.3.3', '0.4.0', '0.4.1' ] ]
+29 verbose addNamed [ 'easynexmo', '0.4.1' ]
+30 verbose addNamed [ '0.4.1', '0.4.1' ]
+31 silly lockFile 533969c8-easynexmo-0-4-1 easynexmo@0.4.1
+32 verbose lock easynexmo@0.4.1 /Users/mikebando/.npm/533969c8-easynexmo-0-4-1.lock
+33 silly lockFile f6abebff-rg-easynexmo-easynexmo-0-4-1-tgz https://registry.npmjs.org/easynexmo/-/easynexmo-0.4.1.tgz
+34 verbose lock https://registry.npmjs.org/easynexmo/-/easynexmo-0.4.1.tgz /Users/mikebando/.npm/f6abebff-rg-easynexmo-easynexmo-0-4-1-tgz.lock
+35 verbose addRemoteTarball [ 'https://registry.npmjs.org/easynexmo/-/easynexmo-0.4.1.tgz',
+35 verbose addRemoteTarball   '3d0cddad07b9259889156b3e1cb82d469eeb29f1' ]
+36 info retry fetch attempt 1 at 00:47:47
+37 verbose fetch to= /var/folders/hl/2qp3j2m91fz5r6qhtmsz9xlr0000gn/T/npm-48536-3u1XpThm/registry.npmjs.org/easynexmo/-/easynexmo-0.4.1.tgz
+38 http GET https://registry.npmjs.org/easynexmo/-/easynexmo-0.4.1.tgz
+39 http 200 https://registry.npmjs.org/easynexmo/-/easynexmo-0.4.1.tgz
+40 silly lockFile f6abebff-rg-easynexmo-easynexmo-0-4-1-tgz https://registry.npmjs.org/easynexmo/-/easynexmo-0.4.1.tgz
+41 silly lockFile f6abebff-rg-easynexmo-easynexmo-0-4-1-tgz https://registry.npmjs.org/easynexmo/-/easynexmo-0.4.1.tgz
+42 silly lockFile 533969c8-easynexmo-0-4-1 easynexmo@0.4.1
+43 silly lockFile 533969c8-easynexmo-0-4-1 easynexmo@0.4.1
+44 silly lockFile 75e9b1fe-easynexmo easynexmo@
+45 silly lockFile 75e9b1fe-easynexmo easynexmo@
+46 silly resolved [ { name: 'easynexmo',
+46 silly resolved     author: { name: 'Prabhu Velayutham' },
+46 silly resolved     version: '0.4.1',
+46 silly resolved     main: 'lib/nexmo',
+46 silly resolved     keywords: [ 'sms', 'nexmo' ],
+46 silly resolved     homepage: 'https://github.com/pvela/nexmo',
+46 silly resolved     repository: { type: 'git', url: 'git://github.com/pvela/nexmo.git' },
+46 silly resolved     description: 'A nodejs wrapper for nexmo API to send SMS',
+46 silly resolved     contributors: [ [Object], [Object], [Object], [Object] ],
+46 silly resolved     bugs: { url: 'https://github.com/pvela/nexmo/issues' },
+46 silly resolved     _id: 'easynexmo@0.4.1',
 46 silly resolved     dist:
-46 silly resolved      { shasum: 'b65df0ba98a89d7851b72e797926033d1babf7d3',
-46 silly resolved        tarball: 'http://registry.npmjs.org/node-pushserver/-/node-pushserver-0.5.3.tgz' },
-46 silly resolved     _from: 'node-pushserver@',
-46 silly resolved     _npmVersion: '1.3.2',
-46 silly resolved     _npmUser: { name: 'smile', email: 'pole.mobile@smile.fr' },
+46 silly resolved      { shasum: '3d0cddad07b9259889156b3e1cb82d469eeb29f1',
+46 silly resolved        tarball: 'http://registry.npmjs.org/easynexmo/-/easynexmo-0.4.1.tgz' },
+46 silly resolved     _from: 'easynexmo@',
+46 silly resolved     _npmVersion: '1.3.24',
+46 silly resolved     _npmUser: { name: 'pvela', email: 'prabhu.v@gmail.com' },
 46 silly resolved     maintainers: [ [Object] ],
 46 silly resolved     directories: {},
-46 silly resolved     _shasum: 'b65df0ba98a89d7851b72e797926033d1babf7d3',
-46 silly resolved     _resolved: 'https://registry.npmjs.org/node-pushserver/-/node-pushserver-0.5.3.tgz' } ]
-47 info install node-pushserver@0.5.3 into /usr/local/lib
-48 info installOne node-pushserver@0.5.3
-49 verbose lib/node_modules/node-pushserver unbuild
-50 verbose tar unpack /Users/mikebando/.npm/node-pushserver/0.5.3/package.tgz
-51 silly lockFile 51944b09-lib-node-modules-node-pushserver tar:///usr/local/lib/node_modules/node-pushserver
-52 verbose lock tar:///usr/local/lib/node_modules/node-pushserver /Users/mikebando/.npm/51944b09-lib-node-modules-node-pushserver.lock
-53 silly lockFile 66028aca-ode-pushserver-0-5-3-package-tgz tar:///Users/mikebando/.npm/node-pushserver/0.5.3/package.tgz
-54 verbose lock tar:///Users/mikebando/.npm/node-pushserver/0.5.3/package.tgz /Users/mikebando/.npm/66028aca-ode-pushserver-0-5-3-package-tgz.lock
+46 silly resolved     _shasum: '3d0cddad07b9259889156b3e1cb82d469eeb29f1',
+46 silly resolved     _resolved: 'https://registry.npmjs.org/easynexmo/-/easynexmo-0.4.1.tgz' } ]
+47 info install easynexmo@0.4.1 into /usr/local/lib
+48 info installOne easynexmo@0.4.1
+49 verbose lib/node_modules/easynexmo unbuild
+50 verbose tar unpack /Users/mikebando/.npm/easynexmo/0.4.1/package.tgz
+51 silly lockFile e91f833f-local-lib-node-modules-easynexmo tar:///usr/local/lib/node_modules/easynexmo
+52 verbose lock tar:///usr/local/lib/node_modules/easynexmo /Users/mikebando/.npm/e91f833f-local-lib-node-modules-easynexmo.lock
+53 silly lockFile 7c0658c2--npm-easynexmo-0-4-1-package-tgz tar:///Users/mikebando/.npm/easynexmo/0.4.1/package.tgz
+54 verbose lock tar:///Users/mikebando/.npm/easynexmo/0.4.1/package.tgz /Users/mikebando/.npm/7c0658c2--npm-easynexmo-0-4-1-package-tgz.lock
 55 silly gunzTarPerm modes [ '755', '644' ]
-56 error Error: EACCES, mkdir '/usr/local/lib/node_modules/node-pushserver'
-56 error  { [Error: EACCES, mkdir '/usr/local/lib/node_modules/node-pushserver']
+56 error Error: EACCES, mkdir '/usr/local/lib/node_modules/easynexmo'
+56 error  { [Error: EACCES, mkdir '/usr/local/lib/node_modules/easynexmo']
 56 error   errno: 3,
 56 error   code: 'EACCES',
-56 error   path: '/usr/local/lib/node_modules/node-pushserver',
+56 error   path: '/usr/local/lib/node_modules/easynexmo',
 56 error   fstream_type: 'Directory',
-56 error   fstream_path: '/usr/local/lib/node_modules/node-pushserver',
+56 error   fstream_path: '/usr/local/lib/node_modules/easynexmo',
 56 error   fstream_class: 'DirWriter',
 56 error   fstream_stack:
 56 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
@@ -132,17 +117,17 @@
 56 error      'Object.oncomplete (fs.js:107:15)' ] }
 57 error Please try running this command again as root/Administrator.
 58 error System Darwin 13.3.0
-59 error command "node" "/usr/local/bin/npm" "install" "node-pushserver" "-g"
-60 error cwd /Users/mikebando/Desktop/MKSTFA server
+59 error command "node" "/usr/local/bin/npm" "install" "easynexmo" "-g"
+60 error cwd /Users/mikebando/Desktop/MKSTFAServer
 61 error node -v v0.10.32
 62 error npm -v 1.4.28
-63 error path /usr/local/lib/node_modules/node-pushserver
-64 error fstream_path /usr/local/lib/node_modules/node-pushserver
+63 error path /usr/local/lib/node_modules/easynexmo
+64 error fstream_path /usr/local/lib/node_modules/easynexmo
 65 error fstream_type Directory
 66 error fstream_class DirWriter
 67 error code EACCES
 68 error errno 3
-69 error stack Error: EACCES, mkdir '/usr/local/lib/node_modules/node-pushserver'
+69 error stack Error: EACCES, mkdir '/usr/local/lib/node_modules/easynexmo'
 70 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
 70 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53
 70 error fstream_stack Object.oncomplete (fs.js:107:15)
