@@ -244,8 +244,8 @@ app.delete('/ppl/:friend/:id', function(req, res) {
   })
 
 })
-app.post('/textreceive', function(req, res) {
-console.log(req.body)
+app.get('/text', function(req, res) {
+
 })
 var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
