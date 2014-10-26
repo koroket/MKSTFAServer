@@ -249,7 +249,7 @@ app.delete('/ppl/:friend/:id', function(req, res) {
 })
 app.get('/text', function(req, res) {
 
-nexmo.sendTextMessage('16502817691','16502817691','test',consolelog)
+nexmo.sendTextMessage('16502817691','16502817692','test',consolelog)
 
 });
 function consolelog (err,messageResponse) {
