@@ -13,9 +13,6 @@ var yelp = require("yelp").createClient({
 var GooglePlaces = require("googleplaces");
 var googlePlaces = new GooglePlaces("AIzaSyC5p7KH-SOmf2dgYFMqFm9H1vYAXX0jcMs", "json");
 
-var nexmo = require('./lib/nexmo');
-
-nexmo.initialize(bc60070f,f43fd188,http,true);
 
 var options = { };
 
@@ -247,18 +244,7 @@ app.delete('/ppl/:friend/:id', function(req, res) {
   })
 
 })
-app.get('/text', function(req, res) {
 
-nexmo.sendTextMessage('16502817691','16502817692','test',consolelog)
-
-});
-function consolelog (err,messageResponse) {
-  if (err) {
-                console.log(err);
-        } else {
-                console.dir(messageResponse);
-        }
-}
 var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
   console.log("Listening on " + port);
