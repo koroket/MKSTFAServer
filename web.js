@@ -10,6 +10,30 @@ var yelp = require("yelp").createClient({
   token: "PMSIKP0XrmmaqoCzHjwRB9K3DM4oIDOf",
   token_secret: "KRSvWPtiHBp-NLmfz8xeArwKDZ0"
 });
+var messagebird = require('messagebird')
+
+messagebird.username = 'koroket'
+messagebird.password = '2127512qwerty'
+
+messagebird.credits( function( err, data ) {
+    if( ! err ) {
+        console.log( '€ '+ data.euro +' and '+ data.credits +' credits left' )
+    } else {
+        console.log( 'An error occured:' )
+        console.log( err )
+    }
+})
+function myCallback( err, data ) {
+    if( err ) {
+        console.log( err )
+        console.log( err.stack )
+    } else {
+        console.log( data )
+    }
+}
+
+messagebird.credits( myCallback )
+
 var GooglePlaces = require("googleplaces");
 var googlePlaces = new GooglePlaces("AIzaSyC5p7KH-SOmf2dgYFMqFm9H1vYAXX0jcMs", "json");
 
@@ -245,6 +269,14 @@ app.delete('/ppl/:friend/:id', function(req, res) {
 
 })
 app.get('/text', function(req, res) {
+var vars = {
+  timestamp: '201401201803',
+  reference: 'message1',
+  gateway_id: 2
+}
+
+
+messagebird.sms( 'MyName', '16502817692', 'Hello', vars, myCallback ) 
 
 })
 var port = Number(process.env.PORT || 5000);
