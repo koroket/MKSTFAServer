@@ -87,6 +87,7 @@ app.get('/yelp/:location/:search/:mynum', function(req, res) {
   console.log('myside is startinng to send');
   var myvar = {latitude:37.26,longitude:122.8}
   yelp.search({limit: req.params.mynum,ll:'37.26,122.8', term:req.params.search}, function(error, data) {
+  console.log(data)
   if(error) res.status(500).send()
     res.send(data)
 });
