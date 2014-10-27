@@ -85,7 +85,7 @@ app.get('/token/:friend', function(req, res) {
 
 app.get('/yelp/:location/:search/:mynum', function(req, res) {
   
-  yelp.search({limit: req.params.mynum, ll:'37.26,122.8', term:req.params.search}, function(error, data) {
+  yelp.search({limit: req.params.mynum, location: req.params.location, term:req.params.search}, function(error, data) {
   if(error) res.status(500).send()
     res.send(data)
 });
