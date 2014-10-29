@@ -109,8 +109,8 @@ app.get('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
   var sendDictionary = {}
   //sendDictionary["Tokens"] = 
     res.send(data)
-  }
-  }
+  
+  
 });
   
 
