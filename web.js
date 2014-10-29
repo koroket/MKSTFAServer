@@ -90,17 +90,19 @@ app.get('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
   console.log(fixed)
   yelp.search({limit: req.params.mynum,ll:fixed, term:req.params.search}, function(error, data) {
   if(error) res.status(500).send()//YelpFailedLetThemKnow
-  var buisiness = data.businesses
+  var buisiness = data["businesses"]
+
   var decisionObjects = []
   var tempReplies = []
   for(var i = 0; i<businiess.length; i++)
   {
+    var buisinessDictionary = buisiness[i]
     tempReplies.push(0)
     var temp = {}
-    temp["Name"] = buisiness[i].name
+    temp["Name"] = buisinessDictionary["name"]
     if(("image_url" in businiess[i]))
     {
-      temp["ImageURL"] = buisiness[i].image_url
+      temp["ImageURL"] = buisinessDictionary["image_url"]
     }
     decisionObjects.push(temp)
   }
