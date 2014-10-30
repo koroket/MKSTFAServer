@@ -126,7 +126,8 @@ app.get('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
 app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
 
   console.log('called');
-
+  
+  var fixed = req.params.lat + ',' + req.params.longi
   yelp.search({limit: req.params.mynum,ll:fixed, term:req.params.search}, function(yelpError, yelpData) {
   
       if(yelpError)
