@@ -142,7 +142,7 @@ app.post('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
           {
              console.log(newTokenArray);
           }
-        }
+        
       })
   }
 
