@@ -136,11 +136,10 @@ app.post('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
 
       collection.find({} ,{}).toArray(function(e, results){
         if (e) res.status(500).send()
-        console.log(results[0].token)
+       // console.log(results[0].token)
         var p = results[0].token
-        newTokenArray.push(results[0].token)
-        newTokenArray = newTokenArray.splice(0)
-        console.log(newTokenArray);
+        newTokenArray.push(p.concat(""))
+        //console.log(newTokenArray);
       })
   }
   console.log(newTokenArray);
