@@ -126,14 +126,16 @@ app.get('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
 app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
 
   console.log('called');
-  
+
   var fixed = req.params.lat + ',' + req.params.longi
   yelp.search({limit: req.params.mynum,ll:fixed, term:req.params.search}, function(yelpError, yelpData) {
   
       if(yelpError)
       {
+        console.log("yelp failed")
          res.status(500).send()//YelpFailedLetThemKnow
       }
+      console.log("yelp good")
       var tokenArray = req.body.friends
   
       var newTokenArray = []
@@ -145,8 +147,12 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
       var tokenCollection = db.collection(dbString)
 
       tokenCollection.find({} ,{}).toArray(function(tokenError, tokenResults){
-            if (tokenError) res.status(500).send()
-
+            if (tokenError)
+              {
+                console.log("token failed")
+                res.status(500).send()
+              } 
+              console.log("token good")
             newTokenArray.push(tokenResults[0].token)
             counter++
 
@@ -179,7 +185,12 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
             var groupCollection = db.collection('groups')
 
             groupCollection.insert(sendDictionary, {}, function(groupError, groupResults){
-              if (groupError) res.status(500).send()
+              if (groupError)
+                {
+                   console.log("group creation failed")
+                   res.status(500).send()
+                }
+              console.log("group creation good")
               for(var i = 0; i < tokenArray.length; i++)
               {
                 var personalDictionary = {}
@@ -192,7 +203,12 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
                 var friendCollection = db.collection(dbString2)
                 var counter2 = 0;
                 friendCollection.insert(personalDictionary, {}, function(friendError, friendResults){
-                  if (friendError) res.status(500).send()
+                  if (friendError)
+                    {
+                      console.log("creation friend side failed")
+                      res.status(500).send()
+                    } 
+                    console.log("creation friend side good")
                     var myDevice = new apn.Device(newTokenArray[counter2]);
                     counter2++
                     var note = new apn.Notification();
@@ -206,6 +222,7 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
                     apnConnection.pushNotification(note, myDevice);
                     if(counter2==newTokenArray.length)
                     {
+                      console.log("everything good")
                       res.send("FASHOOOO")
                     }
                 })
