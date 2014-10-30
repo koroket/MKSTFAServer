@@ -138,11 +138,10 @@ app.post('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
           if (e) res.status(500).send()
 
           newTokenArray.push(results[0].token)
-          if(i=tokenArray.length-1)
+          if(i==(tokenArray.length-1))
           {
              console.log(newTokenArray);
           }
-        
       })
   }
 
