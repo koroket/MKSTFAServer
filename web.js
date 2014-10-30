@@ -135,12 +135,15 @@ app.post('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
       var collection = db.collection(dbString)
 
       collection.find({} ,{}).toArray(function(e, results){
-        if (e) res.status(500).send()
+          if (e) res.status(500).send()
 
-        newTokenArray.push(results[0].token)
-          console.log(newTokenArray);
+          newTokenArray.push(results[0].token)
+          if(i=tokenArray.length-1)
+          {
+             console.log(newTokenArray);
+          }
+        }
       })
-        console.log(newTokenArray);
   }
 
 
