@@ -128,7 +128,7 @@ app.post('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
 
   var tokenArray = req.body.friends
   console.log(req.body.friends)
-  var newTokenArray = ['hi']
+  var newTokenArray = []
   for(var i = 0;i<tokenArray.length;i++)
   {
       var dbString = tokenArray[i] + "token"
@@ -136,13 +136,13 @@ app.post('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
 
       collection.find({} ,{}).toArray(function(e, results){
         if (e) res.status(500).send()
-       // console.log(results[0].token)
-        var p = results[0].token
-        newTokenArray.push(p.toString())
-        //console.log(newTokenArray);
+
+        newTokenArray.push(results[0].token)
+          console.log(newTokenArray);
       })
+        console.log(newTokenArray);
   }
-  console.log(newTokenArray);
+
 
 
   // yelp.search({limit: req.params.mynum,ll:fixed, term:req.params.search}, function(error, data) {
