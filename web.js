@@ -195,7 +195,7 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
               {
                 var personalDictionary = {}
                 personalDictionary["groupID"] = groupResults[0]._id;
-                personalDictionary["number"] = tokenArray.count
+                personalDictionary["number"] = tokenArray.length
                 personalDictionary["currentIndex"] = 0
                 personalDictionary["owner"] = req.body.myName
                 personalDictionary["ownerID"] = req.params.myId
