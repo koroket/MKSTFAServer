@@ -123,64 +123,97 @@ app.get('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
 })
 
 
-app.post('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
+app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
+
   console.log('called');
 
-  var tokenArray = req.body.friends
-  console.log(req.body.friends)
-  var newTokenArray = []
-
-  var counter = 0
-  for(var i = 0;i<tokenArray.length;i++)
-  {
-      var dbString = tokenArray[i] + "token"
-      var collection = db.collection(dbString)
-
-      collection.find({} ,{}).toArray(function(e, results){
-          if (e) res.status(500).send()
-
-          newTokenArray.push(results[0].token)
-          counter++
-          if(counter==(tokenArray.length-1))
-          {
-             console.log(newTokenArray);
-          }
-      })
-  }
-
-
-
-  // yelp.search({limit: req.params.mynum,ll:fixed, term:req.params.search}, function(error, data) {
+  yelp.search({limit: req.params.mynum,ll:fixed, term:req.params.search}, function(yelpError, yelpData) {
   
-  //     if(error) res.status(500).send()//YelpFailedLetThemKnow
-  //     var info = data["businesses"]
+      if(yelpError)
+      {
+         res.status(500).send()//YelpFailedLetThemKnow
+      }
+      var tokenArray = req.body.friends
+  
+      var newTokenArray = []
 
-  //     var decisionObjects = []
-  //     var tempReplies = []
-  //     for(var i = 0; i<info.length; i++)
-  //     {
-  //       var infoDictionary = info[i]
-  //       tempReplies.push(0)
-  //       var temp = {}
-  //       temp["Name"] = infoDictionary["name"]
-  //       if(("image_url" in info[i]))
-  //       {
-  //         temp["ImageURL"] = infoDictionary["image_url"]
-  //       }
-  //       decisionObjects.push(temp)
-  //     }
-  //     var sendDictionary = {}
-  //     sendDictionary["Done"] = -1;
-  //     sendDictionary["Number"] = info.length
-  //     sendDictionary["Replies"] = tempReplies
-  //     sendDictionary["Objects"] = decisionObjects
-  //     console.log("popo")
-  //     console.log(sendDictionary)
-  //     //sendDictionary["Tokens"] = 
-  //       res.send(data)
-      
-      
-  //  });
+      var counter = 0
+      for(var j = 0;j<tokenArray.length;j++)
+      {
+      var dbString = tokenArray[j] + "token"
+      var tokenCollection = db.collection(dbString)
+
+      tokenCollection.find({} ,{}).toArray(function(tokenError, tokenResults){
+            if (tokenError) res.status(500).send()
+
+            newTokenArray.push(tokenResults[0].token)
+            counter++
+
+            //completion handler
+          if(counter==tokenArray.length)
+          {
+            var info = yelpData["businesses"]
+
+            var decisionObjects = []
+            var tempReplies = []
+            for(var i = 0; i<info.length; i++)
+            {
+              var infoDictionary = info[i]
+              tempReplies.push(0)
+              var temp = {}
+              temp["Name"] = infoDictionary["name"]
+              if(("image_url" in info[i]))
+              {
+                temp["ImageURL"] = infoDictionary["image_url"]
+              }
+              decisionObjects.push(temp)
+            }
+            var sendDictionary = {}
+            sendDictionary["Done"] = -1;
+            sendDictionary["Number"] = info.length
+            sendDictionary["Replies"] = tempReplies
+            sendDictionary["Objects"] = decisionObjects
+            sendDictionary["Tokens"] =  newTokenArray
+
+            var groupCollection = db.collection('groups')
+
+            groupCollection.insert(sendDictionary, {}, function(groupError, groupResults){
+              if (groupError) res.status(500).send()
+              for(var i = 0; i < tokenArray.length; i++)
+              {
+                var personalDictionary = {}
+                personalDictionary["groupID"] = groupResults[0]._id;
+                personalDictionary["number"] = tokenArray.count
+                personalDictionary["currentIndex"] = 0
+                personalDictionary["owner"] = req.body.myName
+                personalDictionary["ownerID"] = req.params.myId
+                var dbString2 = tokenArray[i] + "token"
+                var friendCollection = db.collection(dbString2)
+                var counter2 = 0;
+                friendCollection.insert(personalDictionary, {}, function(friendError, friendResults){
+                  if (friendError) res.status(500).send()
+                    var myDevice = new apn.Device(newTokenArray[counter2]);
+                    counter2++
+                    var note = new apn.Notification();
+
+                    note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+                    note.badge = 0;
+                    note.sound = "ping.aiff";
+                    note.alert = "\uD83D\uDCE7 \u2709 You have a new group invite";
+                    note.payload = {'messageFrom': req.body.myName, 'type': "message"};
+
+                    apnConnection.pushNotification(note, myDevice);
+                    if(counter2==newTokenArray.length)
+                    {
+                      res.send("FASHOOOO")
+                    }
+                })
+              }
+            })
+          }
+        })
+      }
+   });
 })
 
 app.get('/google/:search', function(req, res) {
@@ -213,6 +246,7 @@ app.post('/groups', function(req, res) {
     res.send(results) 
   })
 })
+
 app.get('/token/push/:token/:daname', function(req, res) {
   var myDevice = new apn.Device(req.params.token);
 
