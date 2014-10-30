@@ -199,7 +199,7 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
                 personalDictionary["currentIndex"] = 0
                 personalDictionary["owner"] = req.body.myName
                 personalDictionary["ownerID"] = req.params.myId
-                var dbString2 = tokenArray[i] + "token"
+                var dbString2 = tokenArray[i] + "groups"
                 var friendCollection = db.collection(dbString2)
                 var counter2 = 0;
                 friendCollection.insert(personalDictionary, {}, function(friendError, friendResults){
