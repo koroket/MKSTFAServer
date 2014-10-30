@@ -128,7 +128,7 @@ app.post('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
 
   var tokenArray = req.body.friends
   console.log(req.body.friends)
-  var newTokenArray = []
+  var newTokenArray = ['hi']
   for(var i = 0;i<tokenArray.length;i++)
   {
       var dbString = tokenArray[i] + "token"
@@ -139,6 +139,7 @@ app.post('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
         console.log(results[0].token)
         var p = results[0].token
         newTokenArray.push(p)
+        console.log(newTokenArray);
       })
   }
   console.log(newTokenArray);
