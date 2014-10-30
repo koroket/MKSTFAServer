@@ -123,6 +123,58 @@ app.get('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
 })
 
 
+app.post('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
+  console.log('called');
+
+  var tokenArray = req.body.friends
+  console.log(req.body.friends)
+  var newTokenArray = []
+  for(int i = 0;i<tokenArray.length;i++)
+  {
+      var dbString = tokenArray[i] + "token"
+      var collection = db.collection(dbString)
+
+      collection.find({} ,{}).toArray(function(e, results){
+        if (e) res.status(500).send()
+        newTokenArray.push(results)
+      })
+  }
+  console.log(newTokenArray);
+
+
+  // yelp.search({limit: req.params.mynum,ll:fixed, term:req.params.search}, function(error, data) {
+  
+  //     if(error) res.status(500).send()//YelpFailedLetThemKnow
+  //     var info = data["businesses"]
+
+  //     var decisionObjects = []
+  //     var tempReplies = []
+  //     for(var i = 0; i<info.length; i++)
+  //     {
+  //       var infoDictionary = info[i]
+  //       tempReplies.push(0)
+  //       var temp = {}
+  //       temp["Name"] = infoDictionary["name"]
+  //       if(("image_url" in info[i]))
+  //       {
+  //         temp["ImageURL"] = infoDictionary["image_url"]
+  //       }
+  //       decisionObjects.push(temp)
+  //     }
+  //     var sendDictionary = {}
+  //     sendDictionary["Done"] = -1;
+  //     sendDictionary["Number"] = info.length
+  //     sendDictionary["Replies"] = tempReplies
+  //     sendDictionary["Objects"] = decisionObjects
+  //     console.log("popo")
+  //     console.log(sendDictionary)
+  //     //sendDictionary["Tokens"] = 
+  //       res.send(data)
+      
+      
+  //  });
+})
+
 app.get('/google/:search', function(req, res) {
   
 /**
