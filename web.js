@@ -129,7 +129,7 @@ app.post('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
   var tokenArray = req.body.friends
   console.log(req.body.friends)
   var newTokenArray = []
-  for(int i = 0;i<tokenArray.length;i++)
+  for(var i = 0;i<tokenArray.length;i++)
   {
       var dbString = tokenArray[i] + "token"
       var collection = db.collection(dbString)
