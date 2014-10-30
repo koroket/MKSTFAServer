@@ -138,7 +138,7 @@ app.post('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
         if (e) res.status(500).send()
         console.log(results[0].token)
         var p = results[0].token
-        newTokenArray.push(p)
+        newTokenArray.push(results[0].token)
         console.log(newTokenArray);
       })
   }
