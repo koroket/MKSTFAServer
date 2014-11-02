@@ -124,10 +124,12 @@ app.post('/group/:groupName/:sinchgroup', function(req, res) {
       personalDictionary["sinchgroup"] = req.params.sinchgroup;
       personalDictionary["groupName"] = req.params.groupName;
       var dbstring2 = req.body.friendarray[i] +"groupy";
+      console.log(dbString2);
       var friendCollection = db.collection(dbString2)
       var counter = 0;
       friendCollection.insert(personalDictionary, {}, function(friendError, friendResults){
         if(friendError) res.status(500).send()
+          console.log("insert called")
         counter++
         if(counter==tokenArray.length)
         {
