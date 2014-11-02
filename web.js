@@ -126,6 +126,7 @@ app.post('/group/:groupName/:sinchgroup', function(req, res) {
       personalDictionary["friendarray"] = req.body.friendarray;
       personalDictionary["items"] = req.body.items;
       personalDictionary["prices"] = req.body.prices;
+      personalDictionary["ownerid"] = req.body.ownerid;
       console.log(req.body.friendarray)
       var dbstring2 = req.body.friendarray[i] +"groupy";
       console.log(dbstring2);
