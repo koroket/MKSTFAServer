@@ -131,7 +131,7 @@ app.post('/group/:groupName/:sinchgroup', function(req, res) {
         if(friendError) res.status(500).send()
           console.log("insert called")
         counter++
-        if(counter==tokenArray.length)
+        if(counter==req.body.friendarray.length)
         {
           res.send("success");
         }
