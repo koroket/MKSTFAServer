@@ -55,7 +55,7 @@ app.get('/ppl/:fbid', function(req, res) {
   var collection = db.collection(req.params.fbid)
 
   collection.count({}, function(error, numOfDocs) {
-   if(error)
+   if(numOfDocs==0||error)
    {
      var collection3 = db.collection(req.params.fbid)
      var temp = {}
