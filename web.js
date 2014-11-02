@@ -104,7 +104,7 @@ app.get('/ppl/:fbid/paypal/:ppid', function(req, res) {
           collection.updateById(results[0]._id,{$set:{"paypal": req.params.ppid}},{safe: true, multi: false}, function(e3, result3){
           if(e3) res.status(500).send()
           console.log("saved paypal")
-          send(result3)
+          res.send(result3)
           })
         }
         else
