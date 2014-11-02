@@ -52,8 +52,13 @@ app.post('/ppl/:friend', function(req, res) {
 
 // })
 app.get('/ppl/:fbid', function(req, res) {
-  var collection3 = db.collection(req.params.fbid)
-      var temp = {}
+  var collection = db.collection(req.params.fbid)
+
+  collection.count({}, function(error, numOfDocs) {
+   if(error)
+   {
+     var collection3 = db.collection(req.params.fbid)
+     var temp = {}
           temp["fbid"] = req.params.fbid
           temp["venmo"] = "none"
           temp["paypal"] = "none"
@@ -62,33 +67,69 @@ app.get('/ppl/:fbid', function(req, res) {
       if(e2) res.status(500).send()
       res.send("Hello gucci") 
       })
-  // var collection = db.collection(req.params.fbid)
-
-  // collection.count({}, function(error, numOfDocs) {
-  //  if(error)
-  //  {
-  //    var collection3 = db.collection(req.params.fbid)
-  //    var temp = {}
-  //         temp["fbid"] = req.params.fbid
-  //         temp["venmo"] = "none"
-  //         temp["paypal"] = "none"
-  //         console.log(temp)
-    //   collection3.insert(temp, {}, function(e2, results2){
-    //   if(e2) res.status(500).send()
-    //   res.send("Hello gucci") 
-    //   })
-  //  }
-  //   else
-  //   {
-  //    var collection3 = db.collection(req.params.fbid)
-  //    console.log("u gucci")
-  //       collection3.find().toArray(function(err, docs) {
-  //        if(err) res.status(500).send()
-  //        res.send(docs);
-  //       });
-  //   }
-  // })
+   }
+    else
+    {
+     var collection3 = db.collection(req.params.fbid)
+     console.log("u gucci")
+        collection3.find().toArray(function(err, docs) {
+         if(err) res.status(500).send()
+         res.send(docs);
+        });
+    }
+  })
 })
+
+//find user
+app.get('/groups/:fbid', function(req, res) {
+  var fix = req.params.fbid+"groupy";
+  var collection = db.collection(fix)
+
+  collection.find({} ,{}).toArray(function(e, results){
+    if (e) res.status(500).send()
+    res.send(results)
+  })
+})
+
+//link paypal
+app.get('/ppl/:fbid/paypal/:ppid', function(req, res) {
+  var collection = db.collection(req.params.fbid)
+
+  collection.find({} ,{}).toArray(function(e, results){
+    if (e)red.status(500).send()
+    {
+        if(results[0].paypal=="none")
+        {
+          collection.updateById(results[0]._id,{$set:{"paypal": req.params.ppid}},{safe: true, multi: false}, function(e3, result3){
+          if(e3) res.status(500).send()
+          send(result3)
+          })
+        }
+    }
+    res.send(results)
+  })
+})
+
+//Creating a new group
+app.post('/group/:groupName/:sinchgroup', function(req, res) {
+  for(var i = 0; i < tokenArray.length; i++)
+     {
+      var personalDictionary = {}
+      personalDictionary["sinchgroup"] = req.params.sinchgroup;
+      personalDictionary["groupName"] = req.params.groupName;
+      var friendCollection = db.collection(dbString2)
+      var counter = 0;
+      friendCollection.insert(personalDictionary, {}, function(friendError, friendResults){
+        if(friendError) res.status(500).send()
+        counter++
+        if(counter==tokenArray.length)
+        {
+          res.send("success");
+        }
+      })
+    }
+})
+
 app.post('/token/:friend', function(req, res) {
   var collection = db.collection(req.params.friend)
   collection.count({}, function(error, numOfDocs) {
