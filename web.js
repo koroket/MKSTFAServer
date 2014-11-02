@@ -118,11 +118,12 @@ app.get('/ppl/:fbid/paypal/:ppid', function(req, res) {
 
 //Creating a new group
 app.post('/group/:groupName/:sinchgroup', function(req, res) {
-  for(var i = 0; i < tokenArray.length; i++)
+  for(var i = 0; i < req.body.friendarray.length; i++)
      {
       var personalDictionary = {}
       personalDictionary["sinchgroup"] = req.params.sinchgroup;
       personalDictionary["groupName"] = req.params.groupName;
+      var dbstring2 = req.body.friendarray[i] +"groupy";
       var friendCollection = db.collection(dbString2)
       var counter = 0;
       friendCollection.insert(personalDictionary, {}, function(friendError, friendResults){
