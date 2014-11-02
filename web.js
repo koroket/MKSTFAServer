@@ -42,14 +42,52 @@ app.post('/ppl/:friend', function(req, res) {
   })
 })
 
-app.get('/ppl/:friend', function(req, res) {
-  var collection = db.collection(req.params.friend)
+// app.get('/ppl/:friend', function(req, res) {
+//   var collection = db.collection(req.params.friend)
 
-  collection.find({} ,{}).toArray(function(e, results){
-    if (e) res.status(500).send()
-    res.send(results)
-  })
+//   collection.find({} ,{}).toArray(function(e, results){
+//     if (e) res.status(500).send()
+//     res.send(results)
+//   })
 
+// })
+app.get('/ppl/:fbid', function(req, res) {
+  var collection3 = db.collection(req.params.fbid)
+      var temp = {}
+          temp["fbid"] = req.params.fbid
+          temp["venmo"] = "none"
+          temp["paypal"] = "none"
+          console.log(temp)
+      collection3.insert(temp, {}, function(e2, results2){
+      if(e2) res.status(500).send()
+      res.send("Hello gucci") 
+      })
+  // var collection = db.collection(req.params.fbid)
+
+  // collection.count({}, function(error, numOfDocs) {
+  //  if(error)
+  //  {
+  //    var collection3 = db.collection(req.params.fbid)
+  //    var temp = {}
+  //         temp["fbid"] = req.params.fbid
+  //         temp["venmo"] = "none"
+  //         temp["paypal"] = "none"
+  //         console.log(temp)
+    //   collection3.insert(temp, {}, function(e2, results2){
+    //   if(e2) res.status(500).send()
+    //   res.send("Hello gucci") 
+    //   })
+  //  }
+  //   else
+  //   {
+  //    var collection3 = db.collection(req.params.fbid)
+  //    console.log("u gucci")
+  //       collection3.find().toArray(function(err, docs) {
+  //        if(err) res.status(500).send()
+  //        res.send(docs);
+  //       });
+  //   }
+  // })
 })
 app.post('/token/:friend', function(req, res) {
   var collection = db.collection(req.params.friend)
