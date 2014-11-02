@@ -65,7 +65,7 @@ app.get('/ppl/:fbid', function(req, res) {
           console.log(temp)
       collection3.insert(temp, {}, function(e2, results2){
       if(e2) res.status(500).send()
-      res.send("Hello gucci") 
+      res.send(results2) 
       })
    }
     else
