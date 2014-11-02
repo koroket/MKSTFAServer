@@ -96,8 +96,8 @@ app.get('/ppl/:fbid/paypal/:ppid', function(req, res) {
   var collection = db.collection(req.params.fbid)
 
   collection.find({} ,{}).toArray(function(e, results){
-    if (e)red.status(500).send()
-    {
+    if (e)res.status(500).send()
+    else{
         if(results[0].paypal.valueOf()=="none".valueOf())
         {
           console.log("no paypal")
@@ -110,9 +110,9 @@ app.get('/ppl/:fbid/paypal/:ppid', function(req, res) {
         else
         {
           console.log("has pyapal already")
+          res.send("cant change it sorry :P")
         }
     }
-    res.send(results)
   })
 })
 
