@@ -98,12 +98,18 @@ app.get('/ppl/:fbid/paypal/:ppid', function(req, res) {
   collection.find({} ,{}).toArray(function(e, results){
     if (e)red.status(500).send()
     {
-        if(results[0].paypal=="none")
+        if(results[0].paypal.valueOf()=="none".valueOf())
         {
+          console.log("no paypal")
           collection.updateById(results[0]._id,{$set:{"paypal": req.params.ppid}},{safe: true, multi: false}, function(e3, result3){
           if(e3) res.status(500).send()
+          console.log("saved paypal")
           send(result3)
           })
+        }
+        else
+        {
+          console.log("has pyapal already")
         }
     }
     res.send(results)
