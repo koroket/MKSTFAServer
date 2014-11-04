@@ -33,6 +33,13 @@ app.param('collectionName', function(req, res, next, collectionName){
   return next()
 })
 
+// ===================================================================
+//                          Post Methods
+// ===================================================================
+
+/*
+ * Not being used? Look into....
+ */
 app.post('/ppl/:friend', function(req, res) {
   var collection = db.collection(req.params.friend)
 
@@ -42,16 +49,10 @@ app.post('/ppl/:friend', function(req, res) {
   })
 })
 
-app.get('/ppl/:friend', function(req, res) {
-  var collection = db.collection(req.params.friend)
-
-  collection.find({} ,{}).toArray(function(e, results){
-    if (e) res.status(500).send()
-    res.send(results)
-  })
-
-})
-
+/*
+ * Network Communication - linkDeviceToken
+ * Gets called after we receive device token. Connects token with friend database
+ */
 app.post('/token/:friend', function(req, res) {
   var collection = db.collection(req.params.friend)
   collection.count({}, function(error, numOfDocs) {
@@ -74,9 +75,14 @@ app.post('/token/:friend', function(req, res) {
 
 })
 
-
-
-
+/*
+ * FriendViewController - createGroup
+ * 1 - gets information from yelp
+ * 2 - gets device tokens
+ * 3 - creates a new group object
+ * 4 - inserts group code into all of the friend's arrays
+ * 5 - sends push notification to friends
+ */
 app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
 
   console.log('called');
@@ -188,32 +194,18 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
    });
 })
 
-app.get('/google/:search', function(req, res) {
-  
-/**
- * Place search - https://developers.google.com/places/documentation/#PlaceSearchRequests
+
+// ===================================================================
+//                          Get Methods
+// ===================================================================
+
+/*
+ * GroupTableViewController - resetPeople
+ * When reset everything is pressed, this method is called and deletes the 
+   group data of the persons that are passed into it as parameters
  */
-    var parameters;
-
-    parameters = {
-        location:[40.67, -73.94],
-        types: req.params.search
-    };
-
-    googlePlaces.placeSearch(parameters, function (response) {
-  googlePlaces.placeDetailsRequest({reference:response.results[0].reference}, function (response) {
-    res.send(response.result)
-  });
-});
-  
-
-})
-
-
-
-
-app.get('/groups', function(req, res) {
-  var collection = db.collection('groups')
+app.get('/ppl/:friend', function(req, res) {
+  var collection = db.collection(req.params.friend)
 
   collection.find({} ,{}).toArray(function(e, results){
     if (e) res.status(500).send()
@@ -221,6 +213,42 @@ app.get('/groups', function(req, res) {
   })
 })
 
+/*
+ * GroupTableViewController - getGoogle
+ * ****CURRENTLY UNUSED*****
+ */
+app.get('/google/:search', function(req, res) {
+/**
+ * Place search - https://developers.google.com/places/documentation/#PlaceSearchRequests
+ */
+  var parameters;
+  parameters = {
+    location:[40.67, -73.94],
+    types: req.params.search
+  };
+  googlePlaces.placeSearch(parameters, function (response) {
+    googlePlaces.placeDetailsRequest({reference:response.results[0].reference}, function (response) {
+      res.send(response.result)
+      });
+  });
+})
+
+/*
+ * Currently Unused - (For Debugging)
+ * Fetches all of the group data from every user
+ */
+app.get('/groups', function(req, res) {
+  var collection = db.collection('groups')
+  collection.find({} ,{}).toArray(function(e, results){
+    if (e) res.status(500).send()
+    res.send(results)
+  })
+})
+
+/*
+ * GroupTableViewController - tableView:didSelectRowAtIndexPath
+ * Gets information for a single group (the one that the user selected)
+ */
 app.get('/groups/:id', function(req, res) {
   var collection = db.collection('groups')
 
@@ -230,77 +258,14 @@ app.get('/groups/:id', function(req, res) {
   })
 })
 
-app.put('/groups/:id/:number/:selfID/:friend/:numppl', function(req, res, next) {
+// ===================================================================
+//                          Delete Methods
+// ===================================================================
 
-  var collection = db.collection('groups')
-  var collection2 = db.collection(req.params.friend);
-
-  var str1 = "Replies.";
-  var str2 = req.params.number;
-  var variable = str1.concat(str2);
-  
- var action = {};
-
- action[variable] = 1;
-  collection.updateById(req.params.id, {$inc:
-    action
-  }, {safe: true, multi: false}, function(e, result){
-    if (e) res.status(500).send()
-    collection.findById(req.params.id, function(e2, result2){
-      if (e2) res.status(500).send()
-      collection2.updateById(req.params.selfID,{$inc:{"currentIndex": 1}},{safe: true, multi: false}, function(e3, result3){
-         if(e3) res.status(500).send()
-          if(result2.Replies[req.params.number]==req.params.numppl){
-            console.log(result2.Replies[req.params.number])
-            console.log(req.params.numppl)
-            console.log("yes")
-            for (var i = 0; i < result2.Tokens.length; i++) {
-                  console.log(i)
-                  var myDevice = new apn.Device(result2.Tokens[i]);
-
-                  var note = new apn.Notification();
-
-                  note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
-                  note.badge = 3;
-                  note.sound = "ping.aiff";
-                  note.alert = "\uD83D\uDCE7 \u2709 You have a new group invite";
-                  note.payload = result2.Objects[req.params.number];
-
-                  apnConnection.pushNotification(note, myDevice);
-            }
-          }
-          else{
-            console.log(result2.Replies[req.params.number])
-            console.log(req.params.numppl)
-          }
-         res.send({NumberOfReplies:result2.Replies[req.params.number]})
-      })
-    })
-  })
-})
-app.put('/groups/:id/:number/finished', function(req, res, next) {
-
-  var collection = db.collection('groups')
-
-  var str1 = "Done";
-
-  
- var action = {};
-
- action[variable] = req.params.number;
-  collection.updateById(req.params.id, {$set:
-    action
-  }, {safe: true, multi: false}, function(e, result){
-    if (e) res.status(500).send()
-    collection.findById(req.params.id, function(e2, result2){
-      if (e2) res.status(500).send()
-        console.log(result2.Replies[req.params.number]);
-      res.send({NumberOfReplies:result2.Replies[req.params.number] }
-
-        )
-    })
-  })
-})
+/*
+ * GroupTableViewController - deleteGroup
+ * Deletes a group from the group database
+ */
 app.delete('/groups/:id', function(req, res, next) {
   var collection = db.collection('groups')
   collection.removeById(req.params.id, function(e, result){
@@ -309,6 +274,11 @@ app.delete('/groups/:id', function(req, res, next) {
     res.send((result === 1)?{msg: 'success'} : {msg: 'error'})
   })
 })
+
+/*
+ * GroupTableViewController - deleteGroup
+ * Deletes a group from the array of groups that an individual person has 
+ */
 app.delete('/ppl/:friend/:id', function(req, res) {
   var collection = db.collection(req.params.friend)
 
@@ -320,6 +290,79 @@ app.delete('/ppl/:friend/:id', function(req, res) {
 
 })
 
+// ===================================================================
+//                          Put Methods
+// ===================================================================
+/*
+ * DraggableBackground - yesWith:index:andUrl
+ * Increment the number of yesses for one card and if number of yesses equals number of 
+ people in the group also send push notification with info of the match
+*/
+app.put('/groups/:id/:number/:selfID/:friend/:numppl', function(req, res, next) {
+  var collection = db.collection('groups')
+  var collection2 = db.collection(req.params.friend);
+  var str1 = "Replies.";
+  var str2 = req.params.number;
+  var variable = str1.concat(str2);
+  var action = {};
+
+  action[variable] = 1;
+  collection.updateById(req.params.id, {$inc:action}, {safe: true, multi: false}, function(e, result){
+    if (e) res.status(500).send()
+    collection.findById(req.params.id, function(e2, result2){
+      if (e2) res.status(500).send()
+      collection2.updateById(req.params.selfID,{$inc:{"currentIndex": 1}},{safe: true, multi: false}, function(e3, result3){
+         if(e3) res.status(500).send()
+          if(result2.Replies[req.params.number]==req.params.numppl){
+            console.log(result2.Replies[req.params.number])
+            console.log(req.params.numppl)
+            console.log("yes")
+            for (var i = 0; i < result2.Tokens.length; i++) {
+              console.log(i)
+              var myDevice = new apn.Device(result2.Tokens[i]);
+
+              var note = new apn.Notification();
+
+              note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+              note.badge = 3;
+              note.sound = "ping.aiff";
+              note.alert = "\uD83D\uDCE7 \u2709 You have a new group invite";
+              note.payload = result2.Objects[req.params.number];
+
+              apnConnection.pushNotification(note, myDevice);
+            }
+          }
+          else{
+            console.log(result2.Replies[req.params.number])
+            console.log(req.params.numppl)
+          }
+         res.send({NumberOfReplies:result2.Replies[req.params.number]})
+      })
+    })
+  })
+  })
+
+/*
+ * *****CURRENTLY UNUSED******
+ */
+app.put('/groups/:id/:number/finished', function(req, res, next) {
+ var collection = db.collection('groups')
+ var str1 = "Done";
+ var action = {};
+ action[variable] = req.params.number;
+  collection.updateById(req.params.id, {$set:
+    action
+  }, {safe: true, multi: false}, function(e, result){
+    if (e) res.status(500).send()
+    collection.findById(req.params.id, function(e2, result2){
+      if (e2) res.status(500).send()
+        console.log(result2.Replies[req.params.number]);
+      res.send({
+        NumberOfReplies:result2.Replies[req.params.number] }
+      )
+    })
+  })
+})
 
 var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
