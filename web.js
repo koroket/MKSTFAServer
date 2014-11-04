@@ -51,6 +51,7 @@ app.get('/ppl/:friend', function(req, res) {
   })
 
 })
+
 app.post('/token/:friend', function(req, res) {
   var collection = db.collection(req.params.friend)
   collection.count({}, function(error, numOfDocs) {
@@ -73,110 +74,118 @@ app.post('/token/:friend', function(req, res) {
 
 })
 
-app.get('/token/:friend', function(req, res) {
-  var collection = db.collection(req.params.friend)
-
-  collection.find({} ,{}).toArray(function(e, results){
-    if (e) res.status(500).send()
-    res.send(results)
-  })
-
-})
-
-app.get('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
-  console.log('myside is startinng to send');
-  var myvar = {latitude:37.46,longitude:122.25}
-  var fixed = req.params.lat + ',' + req.params.longi
-  console.log(fixed)
-  yelp.search({limit: req.params.mynum,ll:fixed, term:req.params.search}, function(error, data) {
-  if(error) res.status(500).send()//YelpFailedLetThemKnow
-  var info = data["businesses"]
-
-  var decisionObjects = []
-  var tempReplies = []
-  for(var i = 0; i<info.length; i++)
-  {
-    var infoDictionary = info[i]
-    tempReplies.push(0)
-    var temp = {}
-    temp["Name"] = infoDictionary["name"]
-    if(("image_url" in info[i]))
-    {
-      temp["ImageURL"] = infoDictionary["image_url"]
-    }
-    decisionObjects.push(temp)
-  }
-  var sendDictionary = {}
-  sendDictionary["Done"] = -1;
-  sendDictionary["Number"] = info.length
-  sendDictionary["Replies"] = tempReplies
-  sendDictionary["Objects"] = decisionObjects
-  console.log("popo")
-  console.log(sendDictionary)
-  //sendDictionary["Tokens"] = 
-    res.send(data)
-  
-  
-});
-  
-
-})
 
 
-app.post('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
+
+app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
+
   console.log('called');
 
-  var tokenArray = req.body.friends
-  console.log(req.body.friends)
-  var newTokenArray = []
-  for(var i = 0;i<tokenArray.length;i++)
-  {
-      var dbString = tokenArray[i] + "token"
-      var collection = db.collection(dbString)
-
-      collection.find({} ,{}).toArray(function(e, results){
-        if (e) res.status(500).send()
-        console.log(results['token'])
-      console.log(results['_id'])
-      console.log(results)
-      
-        newTokenArray.push(results.token)
-      })
-  }
-  console.log(newTokenArray);
-
-
-  // yelp.search({limit: req.params.mynum,ll:fixed, term:req.params.search}, function(error, data) {
+  var fixed = req.params.lat + ',' + req.params.longi
+  yelp.search({limit: req.params.mynum,ll:fixed, term:req.params.search}, function(yelpError, yelpData) {
   
-  //     if(error) res.status(500).send()//YelpFailedLetThemKnow
-  //     var info = data["businesses"]
+      if(yelpError)
+      {
+        console.log("yelp failed")
+         res.status(500).send()//YelpFailedLetThemKnow
+      }
+      console.log("yelp good")
+      var tokenArray = req.body.friends
+  
+      var newTokenArray = []
 
-  //     var decisionObjects = []
-  //     var tempReplies = []
-  //     for(var i = 0; i<info.length; i++)
-  //     {
-  //       var infoDictionary = info[i]
-  //       tempReplies.push(0)
-  //       var temp = {}
-  //       temp["Name"] = infoDictionary["name"]
-  //       if(("image_url" in info[i]))
-  //       {
-  //         temp["ImageURL"] = infoDictionary["image_url"]
-  //       }
-  //       decisionObjects.push(temp)
-  //     }
-  //     var sendDictionary = {}
-  //     sendDictionary["Done"] = -1;
-  //     sendDictionary["Number"] = info.length
-  //     sendDictionary["Replies"] = tempReplies
-  //     sendDictionary["Objects"] = decisionObjects
-  //     console.log("popo")
-  //     console.log(sendDictionary)
-  //     //sendDictionary["Tokens"] = 
-  //       res.send(data)
-      
-      
-  //  });
+      var counter = 0
+      for(var j = 0;j<tokenArray.length;j++)
+      {
+      var dbString = tokenArray[j] + "token"
+      var tokenCollection = db.collection(dbString)
+
+      tokenCollection.find({} ,{}).toArray(function(tokenError, tokenResults){
+            if (tokenError)
+              {
+                console.log("token failed")
+                res.status(500).send()
+              } 
+              console.log("token good")
+            newTokenArray.push(tokenResults[0].token)
+            counter++
+
+            //completion handler
+          if(counter==tokenArray.length)
+          {
+            var info = yelpData["businesses"]
+
+            var decisionObjects = []
+            var tempReplies = []
+            for(var i = 0; i<info.length; i++)
+            {
+              var infoDictionary = info[i]
+              tempReplies.push(0)
+              var temp = {}
+              temp["Name"] = infoDictionary["name"]
+              if(("image_url" in info[i]))
+              {
+                temp["ImageURL"] = infoDictionary["image_url"]
+              }
+              decisionObjects.push(temp)
+            }
+            var sendDictionary = {}
+            sendDictionary["Done"] = -1;
+            sendDictionary["Number"] = info.length
+            sendDictionary["Replies"] = tempReplies
+            sendDictionary["Objects"] = decisionObjects
+            sendDictionary["Tokens"] =  newTokenArray
+
+            var groupCollection = db.collection('groups')
+
+            groupCollection.insert(sendDictionary, {}, function(groupError, groupResults){
+              if (groupError)
+                {
+                   console.log("group creation failed")
+                   res.status(500).send()
+                }
+              console.log("group creation good")
+              for(var i = 0; i < tokenArray.length; i++)
+              {
+                var personalDictionary = {}
+                personalDictionary["groupID"] = groupResults[0]._id;
+                personalDictionary["number"] = tokenArray.length
+                personalDictionary["currentIndex"] = 0
+                personalDictionary["owner"] = req.body.myName
+                personalDictionary["ownerID"] = req.params.myId
+                var dbString2 = tokenArray[i] + "groups"
+                var friendCollection = db.collection(dbString2)
+                var counter2 = 0;
+                friendCollection.insert(personalDictionary, {}, function(friendError, friendResults){
+                  if (friendError)
+                    {
+                      console.log("creation friend side failed")
+                      res.status(500).send()
+                    } 
+                    console.log("creation friend side good")
+                    var myDevice = new apn.Device(newTokenArray[counter2]);
+                    counter2++
+                    var note = new apn.Notification();
+
+                    note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+                    note.badge = 0;
+                    note.sound = "ping.aiff";
+                    note.alert = "\uD83D\uDCE7 \u2709 You have a new group invite";
+                    note.payload = {'messageFrom': req.body.myName, 'type': "message"};
+
+                    apnConnection.pushNotification(note, myDevice);
+                    if(counter2==newTokenArray.length)
+                    {
+                      console.log("everything good")
+                      res.send("FASHOOOO")
+                    }
+                })
+              }
+            })
+          }
+        })
+      }
+   });
 })
 
 app.get('/google/:search', function(req, res) {
@@ -201,27 +210,7 @@ app.get('/google/:search', function(req, res) {
 })
 
 
-app.post('/groups', function(req, res) {
-  var collection = db.collection('groups')
 
-  collection.insert(req.body, {}, function(e, results){
-    if (e) res.status(500).send()
-    res.send(results) 
-  })
-})
-app.get('/token/push/:token/:daname', function(req, res) {
-  var myDevice = new apn.Device(req.params.token);
-
-    var note = new apn.Notification();
-
-note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
-note.badge = 0;
-note.sound = "ping.aiff";
-note.alert = "\uD83D\uDCE7 \u2709 You have a new group invite";
-note.payload = {'messageFrom': req.params.daname, 'type': "message"};
-
-apnConnection.pushNotification(note, myDevice);
-})
 
 app.get('/groups', function(req, res) {
   var collection = db.collection('groups')
