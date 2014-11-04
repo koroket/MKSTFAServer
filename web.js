@@ -74,54 +74,7 @@ app.post('/token/:friend', function(req, res) {
 
 })
 
-app.get('/token/:friend', function(req, res) {
-  var collection = db.collection(req.params.friend)
 
-  collection.find({} ,{}).toArray(function(e, results){
-    if (e) res.status(500).send()
-    res.send(results)
-  })
-
-})
-
-app.get('/yelp/:lat/:longi/:search/:mynum', function(req, res) {
-  console.log('myside is startinng to send');
-  var myvar = {latitude:37.46,longitude:122.25}
-  var fixed = req.params.lat + ',' + req.params.longi
-  console.log(fixed)
-  yelp.search({limit: req.params.mynum,ll:fixed, term:req.params.search}, function(error, data) {
-  if(error) res.status(500).send()//YelpFailedLetThemKnow
-  var info = data["businesses"]
-
-  var decisionObjects = []
-  var tempReplies = []
-  for(var i = 0; i<info.length; i++)
-  {
-    var infoDictionary = info[i]
-    tempReplies.push(0)
-    var temp = {}
-    temp["Name"] = infoDictionary["name"]
-    if(("image_url" in info[i]))
-    {
-      temp["ImageURL"] = infoDictionary["image_url"]
-    }
-    decisionObjects.push(temp)
-  }
-  var sendDictionary = {}
-  sendDictionary["Done"] = -1;
-  sendDictionary["Number"] = info.length
-  sendDictionary["Replies"] = tempReplies
-  sendDictionary["Objects"] = decisionObjects
-  console.log("popo")
-  console.log(sendDictionary)
-  //sendDictionary["Tokens"] = 
-    res.send(data)
-  
-  
-});
-  
-
-})
 
 
 app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
@@ -257,28 +210,7 @@ app.get('/google/:search', function(req, res) {
 })
 
 
-app.post('/groups', function(req, res) {
-  var collection = db.collection('groups')
 
-  collection.insert(req.body, {}, function(e, results){
-    if (e) res.status(500).send()
-    res.send(results) 
-  })
-})
-
-app.get('/token/push/:token/:daname', function(req, res) {
-  var myDevice = new apn.Device(req.params.token);
-
-    var note = new apn.Notification();
-
-note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
-note.badge = 0;
-note.sound = "ping.aiff";
-note.alert = "\uD83D\uDCE7 \u2709 You have a new group invite";
-note.payload = {'messageFrom': req.params.daname, 'type': "message"};
-
-apnConnection.pushNotification(note, myDevice);
-})
 
 app.get('/groups', function(req, res) {
   var collection = db.collection('groups')
