@@ -151,6 +151,17 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
               {
                 temp["ImageURL"] = infoDictionary["image_url"]
               }
+              if(("categories" in info[i]))
+              {
+                var categoryArray = infoDictionary["categories"]
+                var fixedCategoryArray = []
+                for(int m = 0; m < categoryArray.length; m++)
+                {
+                  var specificarray = categoryArray[m]
+                  fixedCategoryArray.push(specificarray[0]);
+                }
+                temp["Category"] = fixedCategoryArray
+              }
               decisionObjects.push(temp)
             }
             var sendDictionary = {}
