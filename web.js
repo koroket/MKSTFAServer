@@ -163,6 +163,14 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
                 console.log(fixedCategoryArray)
                 temp["Category"] = fixedCategoryArray
               }
+              if(("distance" in info[i]))
+              {
+                temp["distance"] = infoDictionary["distance"]
+              }
+              if(("rating" in info[i]))
+              {
+                temp["rating"] = infoDictionary["rating"]
+              }
               decisionObjects.push(temp)
             }
             var sendDictionary = {}
