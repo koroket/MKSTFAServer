@@ -112,7 +112,7 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
         console.log("yelp failed")
          res.status(500).send()//YelpFailedLetThemKnow
       }
-      console.log(yelpData)
+      console.log(yelpData["categories"])
       var tokenArray = req.body.friends
   
       var newTokenArray = []
