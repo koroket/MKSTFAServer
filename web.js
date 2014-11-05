@@ -112,7 +112,7 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
         console.log("yelp failed")
          res.status(500).send()//YelpFailedLetThemKnow
       }
-      console.log(yelpData["categories"])
+
       var tokenArray = req.body.friends
   
       var newTokenArray = []
@@ -143,6 +143,7 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
             for(var i = 0; i<info.length; i++)
             {
               var infoDictionary = info[i]
+              console.log(infoDictionary["categories"])
               tempReplies.push(0)
               var temp = {}
               temp["Name"] = infoDictionary["name"]
