@@ -137,7 +137,7 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
           if(counter==tokenArray.length)
           {
             var info = yelpData["businesses"]
-
+            console.log(info)
             var decisionObjects = []
             var tempReplies = []
             for(var i = 0; i<info.length; i++)
@@ -160,7 +160,6 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
                   var specificarray = categoryArray[m]
                   fixedCategoryArray.push(specificarray[0]);
                 }
-                console.log(fixedCategoryArray)
                 temp["Category"] = fixedCategoryArray
               }
               if(("distance" in info[i]))
