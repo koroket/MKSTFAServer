@@ -155,11 +155,12 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
               {
                 var categoryArray = infoDictionary["categories"]
                 var fixedCategoryArray = []
-                for(int m = 0; m < categoryArray.length; m++)
+                for(var m = 0; m < categoryArray.length; m++)
                 {
                   var specificarray = categoryArray[m]
                   fixedCategoryArray.push(specificarray[0]);
                 }
+                console.log(fixedCategoryArray)
                 temp["Category"] = fixedCategoryArray
               }
               decisionObjects.push(temp)
