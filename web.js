@@ -11,6 +11,8 @@ var yelp = require("yelp").createClient({
   token_secret: "KRSvWPtiHBp-NLmfz8xeArwKDZ0"
 });
 
+var async = require('async')
+
 var GooglePlaces = require("googleplaces");
 var googlePlaces = new GooglePlaces("AIzaSyC5p7KH-SOmf2dgYFMqFm9H1vYAXX0jcMs", "json");
 
@@ -85,7 +87,22 @@ app.post('/token/:friend', function(req, res) {
  */
 app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
 
-  console.log('called');
+  // async.parallel([
+  //   function(callback) {
+  //       db.get('users', userId, function(err, user) {
+  //           if (err) return callback(err);
+  //           callback();
+  //       });
+  //   },
+  //   function(callback) {
+  //       db.query('posts', {userId: userId}, function(err, posts) {
+  //           if (err) return callback(err);
+  //           callback();
+  //       });
+  //   }
+  // ], function(err) { //This function gets called after the two tasks have called their "task callbacks"
+  //   if (err) return next(err); //If an error occured, we let express/connect handle it by calling the "next" function
+  // });
 
   var fixed = req.params.lat + ',' + req.params.longi
   yelp.search({limit: req.params.mynum,ll:fixed, term:req.params.search}, function(yelpError, yelpData) {
@@ -95,7 +112,7 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
         console.log("yelp failed")
          res.status(500).send()//YelpFailedLetThemKnow
       }
-      console.log("yelp good")
+      console.log(yelpData)
       var tokenArray = req.body.friends
   
       var newTokenArray = []
@@ -193,7 +210,6 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
       }
    });
 })
-
 
 // ===================================================================
 //                          Get Methods
