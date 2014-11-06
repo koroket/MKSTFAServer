@@ -104,6 +104,133 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
   //   if (err) return next(err); //If an error occured, we let express/connect handle it by calling the "next" function
   // });
 
+
+  // var newTokenArray = []
+  // async.parallel([
+  //   function(callback){
+  //     yelp.search({limit: req.params.mynum,ll:fixed, term:req.params.search}, function(yelpError, yelpData){
+  //       if(yelpError)
+  //       {
+  //         console.log("yelp failed")
+  //          res.status(500).send()//YelpFailedLetThemKnow
+  //       }
+  //       var info = yelpData["businesses"]
+  //           var decisionObjects = []
+  //           var tempReplies = []
+  //           for(var i = 0; i<info.length; i++)
+  //           {
+  //             var infoDictionary = info[i]
+  //             tempReplies.push(0)
+  //             var temp = {}
+  //             temp["Name"] = infoDictionary["name"]
+  //             if(("image_url" in info[i]))
+  //             {
+  //               temp["ImageURL"] = infoDictionary["image_url"]
+  //             }
+  //             if(("categories" in info[i]))
+  //             {
+  //               var categoryArray = infoDictionary["categories"]
+  //               var fixedCategoryArray = []
+  //               for(var m = 0; m < categoryArray.length; m++)
+  //               {
+  //                 var specificarray = categoryArray[m]
+  //                 fixedCategoryArray.push(specificarray[0]);
+  //               }
+  //               temp["Category"] = fixedCategoryArray
+  //             }
+  //             if(("distance" in info[i]))
+  //             {
+  //               temp["distance"] = infoDictionary["distance"]
+  //             }
+  //             if(("rating" in info[i]))
+  //             {
+  //               temp["rating"] = infoDictionary["rating"]
+  //             }
+  //             decisionObjects.push(temp)
+  //           }
+  //           var sendDictionary = {}
+  //           sendDictionary["Done"] = -1;
+  //           sendDictionary["Number"] = info.length
+  //           sendDictionary["Replies"] = tempReplies
+  //           sendDictionary["Objects"] = decisionObjects
+  //           sendDictionary["Tokens"] =  newTokenArray//want to add later
+
+  //           var groupCollection = db.collection('groups')
+
+  //           groupCollection.insert(sendDictionary, {}, function(groupError, groupResults){
+  //             if (groupError)
+  //               {
+  //                  console.log("group creation failed")
+  //                  res.status(500).send()
+  //               }
+  //             callback(null)
+  //           }
+  //     }
+  //   },
+  //   function(callback){
+  //     var counter = 0
+  //     var tokenArray = req.body.friends
+  //     for(var j = 0;j<tokenArray.length;j++)
+  //     {
+  //       var dbString = tokenArray[j] + "token"
+  //       var tokenCollection = db.collection(dbString)
+  //       tokenCollection.find({} ,{}).toArray(function(tokenError, tokenResults){
+  //         if (tokenError)
+  //           {
+  //             console.log("token failed")
+  //             res.status(500).send()
+  //           }
+  //         newTokenArray.push(tokenResults[0].token)
+  //         counter++
+  //         if(counter==tokenArray.length)
+  //         {
+  //           callback(null)
+  //         }
+  //       }
+  //     }
+  //   }
+  // ], function(err) { //This function gets called after the two tasks have called their "task callbacks"
+  //   if (err) return next(err); 
+  //   for(var i = 0; i < tokenArray.length; i++)
+  //             {
+  //               var personalDictionary = {}
+  //               personalDictionary["groupID"] = groupResults[0]._id;
+  //               personalDictionary["number"] = tokenArray.length
+  //               personalDictionary["currentIndex"] = 0
+  //               personalDictionary["owner"] = req.body.myName
+  //               personalDictionary["ownerID"] = req.params.myId
+  //               personalDictionary["friendID"] = req.body.friends
+  //               var dbString2 = tokenArray[i] + "groups"
+  //               var friendCollection = db.collection(dbString2)
+  //               var counter2 = 0;
+  //               friendCollection.insert(personalDictionary, {}, function(friendError, friendResults){
+  //                 if (friendError)
+  //                   {
+  //                     console.log("creation friend side failed")
+  //                     res.status(500).send()
+  //                   } 
+  //                   console.log("creation friend side good")
+  //                   var myDevice = new apn.Device(newTokenArray[counter2]);
+  //                   counter2++
+  //                   var note = new apn.Notification();
+
+  //                   note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
+  //                   note.badge = 0;
+  //                   note.sound = "ping.aiff";
+  //                   note.alert = "\uD83D\uDCE7 \u2709 You have a new group invite";
+  //                   note.payload = {'messageFrom': req.body.myName, 'type': "message"};
+
+  //                   apnConnection.pushNotification(note, myDevice);
+  //                   if(counter2==newTokenArray.length)
+  //                   {
+  //                     console.log("everything good")
+  //                     res.send("FASHOOOO")
+  //                   }
+  //               })
+  //             }
+  // });
+
+
   var fixed = req.params.lat + ',' + req.params.longi
   yelp.search({limit: req.params.mynum,ll:fixed, term:req.params.search}, function(yelpError, yelpData) {
   
@@ -113,11 +240,11 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
          res.status(500).send()//YelpFailedLetThemKnow
       }
 
-      var tokenArray = req.body.friends
+      var tokenArray = req.body.friends//
   
-      var newTokenArray = []
+      var newTokenArray = []//
 
-      var counter = 0
+      var counter = 0//
       for(var j = 0;j<tokenArray.length;j++)
       {
       var dbString = tokenArray[j] + "token"
