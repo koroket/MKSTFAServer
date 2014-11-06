@@ -428,7 +428,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
 
            // json.title = title;
       })
-      $('dd.class.nowrap-price-description').filter(function(){
+      $('.price-description').filter(function(){
 
            // Let's store the data we filter into a variable so we can easily see what's going on.
 
