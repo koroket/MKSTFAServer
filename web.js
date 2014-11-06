@@ -366,7 +366,7 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
 app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
   console.log("started")
   var fixed = req.params.lat + ',' + req.params.longi
-  yelp.search({sort:1, offset: req.params.offset,limit: 20,ll:fixed, term:req.params.search}, function(error, data) {
+  yelp.search({sort:0, offset: req.params.offset,limit: 20,ll:fixed, term:req.params.search}, function(error, data) {
   if(error) res.status(500).send()//YelpFailedLetThemKnow
   var info = data["businesses"]
   var decisionObjects = []
