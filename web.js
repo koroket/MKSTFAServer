@@ -232,7 +232,7 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
 
 
   var fixed = req.params.lat + ',' + req.params.longi
-  yelp.search({limit: req.params.mynum,ll:fixed, term:req.params.search}, function(yelpError, yelpData) {
+  yelp.search({sort: 1, limit: req.params.mynum,ll:fixed, term:req.params.search}, function(yelpError, yelpData) {
   
       if(yelpError)
       {
