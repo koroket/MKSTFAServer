@@ -232,7 +232,7 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
 
 
   var fixed = req.params.lat + ',' + req.params.longi
-  yelp.search({sort: 1, offset:20, limit: req.params.mynum,ll:fixed, term:req.params.search}, function(yelpError, yelpData) {
+  yelp.search({sort: 1, limit: req.params.mynum,ll:fixed, term:req.params.search}, function(yelpError, yelpData) {
   
       if(yelpError)
       {
@@ -362,6 +362,56 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
 // ===================================================================
 //                          Get Methods
 // ===================================================================
+
+app.get('/yelp/:lat/:longi/:search/:mynum/:offset', function(req, res) {
+  var fixed = req.params.lat + ',' + req.params.longi
+  yelp.search({sort:1, offset: req.params.offset,limit: 20,ll:fixed, term:req.params.search}, function(error, data) {
+  if(error) res.status(500).send()//YelpFailedLetThemKnow
+  for(var i = 0; i<info.length; i++)
+  {
+    var infoDictionary = info[i]
+    var temp = {}
+    temp["Name"] = infoDictionary["name"]
+    if(("image_url" in info[i]))
+    {
+      temp["ImageURL"] = infoDictionary["image_url"]
+    }
+    if(("categories" in info[i]))
+    {
+      var categoryArray = infoDictionary["categories"]
+      var fixedCategoryArray = []
+      for(var m = 0; m < categoryArray.length; m++)
+      {
+        var specificarray = categoryArray[m]
+        fixedCategoryArray.push(specificarray[0]);
+      }
+      temp["Category"] = fixedCategoryArray
+    }
+    if(("distance" in info[i]))
+    {
+      temp["distance"] = infoDictionary["distance"]
+    }
+    if(("rating" in info[i]))
+    {
+      temp["rating"] = infoDictionary["rating"]
+    }
+    decisionObjects.push(temp)
+  }
+  var sendDictionary = {}
+  sendDictionary["Done"] = -1;
+  sendDictionary["Number"] = info.length
+  sendDictionary["Replies"] = tempReplies
+  sendDictionary["Objects"] = decisionObjects
+  console.log("popo")
+  console.log(sendDictionary)
+  //sendDictionary["Tokens"] = 
+    res.send(data)
+  
+  
+  });
+  
+
+})
 
 /*
  * GroupTableViewController - resetPeople
