@@ -437,7 +437,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
            // In examining the DOM we notice that the title rests within the first child element of the header tag. 
            // Utilizing jQuery we can easily navigate and get the text by writing the following code:
 
-            console.log(data.children().text())
+            console.log(data.text())
 
            // Once we have our title, we'll store it to the our json object.
 
