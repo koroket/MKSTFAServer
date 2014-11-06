@@ -363,10 +363,11 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
 //                          Get Methods
 // ===================================================================
 
-app.get('/yelp/:lat/:longi/:search/:mynum/:offset', function(req, res) {
+app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
   var fixed = req.params.lat + ',' + req.params.longi
   yelp.search({sort:1, offset: req.params.offset,limit: 20,ll:fixed, term:req.params.search}, function(error, data) {
   if(error) res.status(500).send()//YelpFailedLetThemKnow
+  var info = data["businesses"]
   for(var i = 0; i<info.length; i++)
   {
     var infoDictionary = info[i]
