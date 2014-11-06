@@ -363,7 +363,7 @@ app.post('/yelp/:lat/:longi/:search/:mynum/:myId', function(req, res) {
 //                          Get Methods
 // ===================================================================
 
-app.get('/yelp/:lat', function(req, res) {
+app.get('/yelp/:lat/:longi', function(req, res) {
   console.log("started")
   var fixed = req.params.lat + ',' + req.params.longi
   yelp.search({sort:1, offset: req.params.offset,limit: 20,ll:fixed, term:req.params.search}, function(error, data) {
