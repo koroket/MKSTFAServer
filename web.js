@@ -397,15 +397,8 @@ app.get('/yelp/:lat/:longi/:search/:mynum/:offset', function(req, res) {
     }
     decisionObjects.push(temp)
   }
-  var sendDictionary = {}
-  sendDictionary["Done"] = -1;
-  sendDictionary["Number"] = info.length
-  sendDictionary["Replies"] = tempReplies
-  sendDictionary["Objects"] = decisionObjects
-  console.log("popo")
-  console.log(sendDictionary)
-  //sendDictionary["Tokens"] = 
-    res.send(data)
+
+  res.send(temp)
   
   
   });
