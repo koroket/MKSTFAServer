@@ -373,6 +373,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
   var info = data["businesses"]
   var decisionObjects = []
   var collectionMethods = []
+  var methCounter = 0;
   function makeDictionary(indexNum) {
     return function() { 
 
@@ -427,8 +428,12 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
 
                   console.log(data.children().text())
                   console.log(indexNum)
+                  methCounter++
                  // Once we have our title, we'll store it to the our json object.
-
+                 if(methCounter===(info.length*2))
+                 {
+                    res.send(decisionObjects)
+                 }
                  // json.title = title;
             })
             $('dd.nowrap.price-description').filter(function(){
@@ -442,9 +447,13 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
 
                   console.log(data.text());
                   console.log(indexNum)
-
+                  methCounter++
                  // Once we have our title, we'll store it to the our json object.
-
+                 if(methCounter===(info.length*2))
+                 {
+                    res.send(decisionObjects)
+                 }
+                 // json.tit
                  // json.title = title;
             })
           }
@@ -462,7 +471,6 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
 }
   
 
-  res.send(decisionObjects)
   
   
   });
