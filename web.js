@@ -413,7 +413,8 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
 
             // We'll use the unique header class as a starting point.
 
-      $('span.hour-range').filter(function(){
+      function createfunc(indexNum) {
+        return function(){
 
            // Let's store the data we filter into a variable so we can easily see what's going on.
 
@@ -424,10 +425,14 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
 
             console.log(data.children().text())
 
+            console.log(indexNum)
+
            // Once we have our title, we'll store it to the our json object.
 
            // json.title = title;
-      })
+      };
+      }
+      $('span.hour-range').filter(createfunc(i))
       $('dd.nowrap.price-description').filter(function(){
 
            // Let's store the data we filter into a variable so we can easily see what's going on.
