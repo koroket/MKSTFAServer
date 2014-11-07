@@ -372,6 +372,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
   if(error) res.status(500).send()//YelpFailedLetThemKnow
   var info = data["businesses"]
   var decisionObjects = []
+
   for(var i = 0; i<info.length; i++)
   {
     var infoDictionary = info[i]
@@ -412,10 +413,9 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
       var json = { title : "", release : "", rating : ""};
 
             // We'll use the unique header class as a starting point.
-
-      $('span.hour-range').filter(function(){
-
-           // Let's store the data we filter into a variable so we can easily see what's going on.
+      function getPrice(myIndex) {
+        return function() { 
+          console.log("My index: " + myIndex); 
 
             var data = $(this);
 
@@ -423,11 +423,9 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
            // Utilizing jQuery we can easily navigate and get the text by writing the following code:
 
             console.log(data.children().text())
-
-           // Once we have our title, we'll store it to the our json object.
-
-           // json.title = title;
-      })
+        };
+      }
+      $('span.hour-range').filter(getPrice(i))
       $('dd.nowrap.price-description').filter(function(){
 
            // Let's store the data we filter into a variable so we can easily see what's going on.
