@@ -462,7 +462,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
 
   };
   for (var i = 0; i < info.length; i++) {
-    collectionMethods[i] = createfunc(i);
+    collectionMethods[i] = makeDictionary(i);
   }
   for (var j = 0; j < 3; j++) {
     collectionMethods[j]();         
