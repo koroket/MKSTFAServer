@@ -450,7 +450,10 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
   })
       };
       }
-  createfunc(i)
+  var myfunc = []
+  myfunc[0] = createfunc(i)
+  myfunc[0]();
+  
 
   
   }
