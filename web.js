@@ -413,20 +413,22 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
       var json = { title : "", release : "", rating : ""};
 
             // We'll use the unique header class as a starting point.
-      function getPrice(myIndex) {
-        
-          console.log("My index: " + myIndex); 
+      
+      $('span.hour-range').filter(function(){
+
+           // Let's store the data we filter into a variable so we can easily see what's going on.
 
             var data = $(this);
 
            // In examining the DOM we notice that the title rests within the first child element of the header tag. 
            // Utilizing jQuery we can easily navigate and get the text by writing the following code:
 
-          console.log(data.children().text())
-          return
-        
-      }
-      $('span.hour-range').filter(getPrice(i))
+            console.log(data.children().text())
+
+           // Once we have our title, we'll store it to the our json object.
+
+           // json.title = title;
+      })
       $('dd.nowrap.price-description').filter(function(){
 
            // Let's store the data we filter into a variable so we can easily see what's going on.
