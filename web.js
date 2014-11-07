@@ -403,7 +403,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
     decisionObjects.push(temp)
 
     url = infoDictionary["url"];
-
+    var methCounter = 0
     function createfunc(index) {
         return function() { 
 
@@ -427,6 +427,11 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
 
             console.log(data.children().text())
             console.log(index)
+            methCounter++
+            if(methCounter===(info.length*2))
+            {
+              res.send(decisionObjects)
+            }
            // Once we have our title, we'll store it to the our json object.
 
            // json.title = title;
@@ -441,7 +446,11 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
            // Utilizing jQuery we can easily navigate and get the text by writing the following code:
 
             console.log(data.text());
-
+            methCounter++
+            if(methCounter===(info.length*2))
+            {
+              res.send(decisionObjects)
+            }
            // Once we have our title, we'll store it to the our json object.
 
            // json.title = title;
@@ -458,7 +467,6 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
   
   }
 
-  res.send(decisionObjects)
   
   
   });
