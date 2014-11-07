@@ -372,7 +372,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
   if(error) res.status(500).send()//YelpFailedLetThemKnow
   var info = data["businesses"]
   var decisionObjects = []
-
+  
   for(var i = 0; i<info.length; i++)
   {
     var infoDictionary = info[i]
@@ -422,7 +422,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
 
            // In examining the DOM we notice that the title rests within the first child element of the header tag. 
            // Utilizing jQuery we can easily navigate and get the text by writing the following code:
-            console.log(temp)
+
             console.log(data.children().text())
 
            // Once we have our title, we'll store it to the our json object.
@@ -437,7 +437,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
 
            // In examining the DOM we notice that the title rests within the first child element of the header tag. 
            // Utilizing jQuery we can easily navigate and get the text by writing the following code:
-            console.log(temp)
+
             console.log(data.text())
 
            // Once we have our title, we'll store it to the our json object.
