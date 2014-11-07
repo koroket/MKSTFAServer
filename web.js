@@ -404,7 +404,10 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
 
     url = infoDictionary["url"];
 
-  request(url, function(error, response, html){
+    function createfunc(index) {
+        return function() { 
+
+          request(url, function(error, response, html){
     if(!error){
       var $ = cheerio.load(html);
 
@@ -423,7 +426,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
            // Utilizing jQuery we can easily navigate and get the text by writing the following code:
 
             console.log(data.children().text())
-            
+            console.log(index)
            // Once we have our title, we'll store it to the our json object.
 
            // json.title = title;
@@ -445,6 +448,11 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
       })
     }
   })
+      };
+      }
+  createfunc(i)
+
+  
   }
 
   res.send(decisionObjects)
