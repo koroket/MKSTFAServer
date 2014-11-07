@@ -429,7 +429,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
             myDictionary["hours"] = data.children().text()
             
             
-            if(methCounter===(info.length*2))
+            if(methCounter===(info.length))
             {
               res.send(decisionObjects)
             }
@@ -449,7 +449,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
             myDictionary["price"] = data.text()
             
             
-            if(methCounter===(info.length*2))
+            if(methCounter===(info.length))
             {
               res.send(decisionObjects)
             }
