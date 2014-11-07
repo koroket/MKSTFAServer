@@ -427,6 +427,8 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
 
             console.log(data.children().text())
             console.log(index)
+            var myDictionary = decisionObjects[index]
+            myDictionary["hours"] = data.children().text()
             methCounter++
             if(methCounter===(info.length*2))
             {
@@ -446,6 +448,8 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
            // Utilizing jQuery we can easily navigate and get the text by writing the following code:
 
             console.log(data.text());
+            var myDictionary = decisionObjects[index]
+            myDictionary["price"] = data.text()
             methCounter++
             if(methCounter===(info.length*2))
             {
