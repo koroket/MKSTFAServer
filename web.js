@@ -372,105 +372,82 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
   if(error) res.status(500).send()//YelpFailedLetThemKnow
   var info = data["businesses"]
   var decisionObjects = []
-  var collectionMethods = []
-  var methCounter = 0;
-  function makeDictionary(indexNum) {
-    return function() { 
+  for(var i = 0; i<info.length; i++)
+  {
+    var infoDictionary = info[i]
+    var temp = {}
+    temp["Name"] = infoDictionary["name"]
+    if(("image_url" in info[i]))
+    {
+      temp["ImageURL"] = infoDictionary["image_url"]
+    }
+    if(("categories" in info[i]))
+    {
+      var categoryArray = infoDictionary["categories"]
+      var fixedCategoryArray = []
+      for(var m = 0; m < categoryArray.length; m++)
+      {
+        var specificarray = categoryArray[m]
+        fixedCategoryArray.push(specificarray[0]);
+      }
+      temp["Category"] = fixedCategoryArray
+    }
+    if(("distance" in info[i]))
+    {
+      temp["distance"] = infoDictionary["distance"]
+    }
+    if(("rating" in info[i]))
+    {
+      temp["rating"] = infoDictionary["rating"]
+    }
+    decisionObjects.push(temp)
 
-          var infoDictionary = info[indexNum]
-          var temp = {}
-          temp["Name"] = infoDictionary["name"]
-          if(("image_url" in info[indexNum]))
-          {
-            temp["ImageURL"] = infoDictionary["image_url"]
-          }
-          if(("categories" in info[indexNum]))
-          {
-            var categoryArray = infoDictionary["categories"]
-            var fixedCategoryArray = []
-            for(var m = 0; m < categoryArray.length; m++)
-            {
-              var specificarray = categoryArray[m]
-              fixedCategoryArray.push(specificarray[0]);
-            }
-            temp["Category"] = fixedCategoryArray
-          }
-          if(("distance" in info[indexNum]))
-          {
-            temp["distance"] = infoDictionary["distance"]
-          }
-          if(("rating" in info[indexNum]))
-          {
-            temp["rating"] = infoDictionary["rating"]
-          }
-          decisionObjects.push(temp)
+    url = infoDictionary["url"];
 
-          url = infoDictionary["url"];
+  request(url, function(error, response, html){
+    if(!error){
+      var $ = cheerio.load(html);
 
-        request(url, function(error, response, html){
-          if(!error){
-            var $ = cheerio.load(html);
+      var title, release, rating;
+      var json = { title : "", release : "", rating : ""};
 
-            var title, release, rating;
-            var json = { title : "", release : "", rating : ""};
+            // We'll use the unique header class as a starting point.
 
-                  // We'll use the unique header class as a starting point.
+      $('span.hour-range').filter(function(){
 
+           // Let's store the data we filter into a variable so we can easily see what's going on.
 
-            $('span.hour-range').filter(function(){
+            var data = $(this);
 
-                 // Let's store the data we filter into a variable so we can easily see what's going on.
+           // In examining the DOM we notice that the title rests within the first child element of the header tag. 
+           // Utilizing jQuery we can easily navigate and get the text by writing the following code:
 
-                  var data = $(this);
+            console.log(data.children().text())
+            
+           // Once we have our title, we'll store it to the our json object.
 
-                 // In examining the DOM we notice that the title rests within the first child element of the header tag. 
-                 // Utilizing jQuery we can easily navigate and get the text by writing the following code:
+           // json.title = title;
+      })
+      $('dd.nowrap.price-description').filter(function(){
 
-                  console.log(data.children().text())
-                  console.log(indexNum)
-                  methCounter++
-                 // Once we have our title, we'll store it to the our json object.
-                 if(methCounter===(info.length*2))
-                 {
-                    res.send(decisionObjects)
-                 }
-                 // json.title = title;
-            })
-            $('dd.nowrap.price-description').filter(function(){
+           // Let's store the data we filter into a variable so we can easily see what's going on.
 
-                 // Let's store the data we filter into a variable so we can easily see what's going on.
+            var data = $(this);
 
-                  var data = $(this);
+           // In examining the DOM we notice that the title rests within the first child element of the header tag. 
+           // Utilizing jQuery we can easily navigate and get the text by writing the following code:
 
-                 // In examining the DOM we notice that the title rests within the first child element of the header tag. 
-                 // Utilizing jQuery we can easily navigate and get the text by writing the following code:
+            console.log(data.text());
 
-                  console.log(data.text());
-                  console.log(indexNum)
-                  methCounter++
-                 // Once we have our title, we'll store it to the our json object.
-                 if(methCounter===(info.length*2))
-                 {
-                    res.send(decisionObjects)
-                 }
-                 // json.tit
-                 // json.title = title;
-            })
-          }
-        })
-  
+           // Once we have our title, we'll store it to the our json object.
 
-  };
-  for (var i = 0; i < info.length; i++) {
-    collectionMethods[i] = makeDictionary(i);
-  }
-  for (var j = 0; j < info.length; j++) {
-    collectionMethods[j]();         
+           // json.title = title;
+      })
+    }
+  })
   }
 
-}
-  
-
+  res.send(decisionObjects)
   
   
   });
