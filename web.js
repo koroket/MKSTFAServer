@@ -422,8 +422,6 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
 
             var data = $(this);
 
-           // In examining the DOM we notice that the title rests within the first child element of the header tag. 
-           // Utilizing jQuery we can easily navigate and get the text by writing the following code:
 
             console.log(data.children().text())
             console.log(index)
@@ -431,7 +429,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
             myDictionary["hours"] = data.children().text()
             methCounter++
             
-            if(methCounter===(info.length*2))
+            if(methCounter===(info.length))
             {
               console.log('swag')
               res.send(decisionObjects)
@@ -446,15 +444,13 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
 
             var data = $(this);
 
-           // In examining the DOM we notice that the title rests within the first child element of the header tag. 
-           // Utilizing jQuery we can easily navigate and get the text by writing the following code:
 
             console.log(data.text());
             var myDictionary = decisionObjects[index]
             myDictionary["price"] = data.text()
             methCounter++
             
-            if(methCounter===(info.length*2))
+            if(methCounter===(info.length))
             {
               console.log('swag')
               res.send(decisionObjects)
