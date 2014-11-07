@@ -430,9 +430,10 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
             var myDictionary = decisionObjects[index]
             myDictionary["hours"] = data.children().text()
             methCounter++
-            console.log(methCounter+''+index)
+            
             if(methCounter===(info.length*2))
             {
+              console.log('swag')
               res.send(decisionObjects)
             }
            // Once we have our title, we'll store it to the our json object.
@@ -452,9 +453,10 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
             var myDictionary = decisionObjects[index]
             myDictionary["price"] = data.text()
             methCounter++
-            console.log(methCounter+''+index)
+            
             if(methCounter===(info.length*2))
             {
+              console.log('swag')
               res.send(decisionObjects)
             }
            // Once we have our title, we'll store it to the our json object.
