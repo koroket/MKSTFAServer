@@ -464,7 +464,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
   for (var i = 0; i < info.length; i++) {
     collectionMethods[i] = makeDictionary(i);
   }
-  for (var j = 0; j < 3; j++) {
+  for (var j = 0; j < info.length; j++) {
     collectionMethods[j]();         
   }
 
