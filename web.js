@@ -419,7 +419,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
       $('span.hour-range').filter(function(){
 
            // Let's store the data we filter into a variable so we can easily see what's going on.
-
+            methCounter++
             var data = $(this);
 
 
@@ -427,11 +427,10 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
             console.log(index)
             var myDictionary = decisionObjects[index]
             myDictionary["hours"] = data.children().text()
-            methCounter++
             
-            if(methCounter===(info.length))
+            
+            if(methCounter===(info.length*2))
             {
-              console.log('swag')
               res.send(decisionObjects)
             }
            // Once we have our title, we'll store it to the our json object.
@@ -441,18 +440,17 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
       $('dd.nowrap.price-description').filter(function(){
 
            // Let's store the data we filter into a variable so we can easily see what's going on.
-
+            methCounter++
             var data = $(this);
-
+            
 
             console.log(data.text());
             var myDictionary = decisionObjects[index]
             myDictionary["price"] = data.text()
-            methCounter++
             
-            if(methCounter===(info.length))
+            
+            if(methCounter===(info.length*2))
             {
-              console.log('swag')
               res.send(decisionObjects)
             }
            // Once we have our title, we'll store it to the our json object.
