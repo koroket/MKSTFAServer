@@ -423,6 +423,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
            // Utilizing jQuery we can easily navigate and get the text by writing the following code:
 
           console.log(data.children().text())
+          return
         
       }
       $('span.hour-range').filter(getPrice(i))
