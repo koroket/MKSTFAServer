@@ -414,7 +414,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
 
             // We'll use the unique header class as a starting point.
       function getPrice(myIndex) {
-        return function() { 
+        
           console.log("My index: " + myIndex); 
 
             var data = $(this);
@@ -422,8 +422,8 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
            // In examining the DOM we notice that the title rests within the first child element of the header tag. 
            // Utilizing jQuery we can easily navigate and get the text by writing the following code:
 
-            console.log(data.children().text())
-        };
+          console.log(data.children().text())
+        
       }
       $('span.hour-range').filter(getPrice(i))
       $('dd.nowrap.price-description').filter(function(){
