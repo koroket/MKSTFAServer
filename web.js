@@ -377,6 +377,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
     var infoDictionary = info[i]
     var temp = {}
     temp["Name"] = infoDictionary["name"]
+    temp["id"] = infoDictionary["id"]
     if(("image_url" in info[i]))
     {
       temp["ImageURL"] = infoDictionary["image_url"]
@@ -404,6 +405,7 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
     {
       temp["url"] = infoDictionary["url"]
     }
+
     decisionObjects.push(temp)
 
     url = infoDictionary["url"];
