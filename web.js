@@ -404,70 +404,73 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
 
     url = infoDictionary["url"];
     var methCounter = 0
-    function createfunc(index) {
-        return function() { 
 
-          request(url, function(error, response, html){
-    if(!error){
-      var $ = cheerio.load(html);
+  //   function createfunc(index) {
+  //       return function() { 
 
-      var title, release, rating;
-      var json = { title : "", release : "", rating : ""};
+  //         request(url, function(error, response, html){
+  //   if(!error){
+  //     var $ = cheerio.load(html);
 
-            // We'll use the unique header class as a starting point.
+  //     var title, release, rating;
+  //     var json = { title : "", release : "", rating : ""};
 
-      $('span.hour-range').filter(function(){
+  //           // We'll use the unique header class as a starting point.
 
-           // Let's store the data we filter into a variable so we can easily see what's going on.
-            methCounter++
-            var data = $(this);
+  //     $('span.hour-range').filter(function(){
+
+  //          // Let's store the data we filter into a variable so we can easily see what's going on.
+  //           methCounter++
+  //           var data = $(this);
 
 
-            console.log(data.children().text())
-            console.log(index)
-            var myDictionary = decisionObjects[index]
-            myDictionary["hours"] = data.children().text()
+  //           console.log(data.children().text())
+  //           console.log(index)
+  //           var myDictionary = decisionObjects[index]
+  //           myDictionary["hours"] = data.children().text()
             
             
-            if(methCounter===(info.length))
-            {
-              res.send(decisionObjects)
-            }
-           // Once we have our title, we'll store it to the our json object.
+  //           if(methCounter===(info.length))
+  //           {
+  //             res.send(decisionObjects)
+  //           }
+  //          // Once we have our title, we'll store it to the our json object.
 
-           // json.title = title;
-      })
-      $('dd.nowrap.price-description').filter(function(){
+  //          // json.title = title;
+  //     })
+  //     $('dd.nowrap.price-description').filter(function(){
 
-           // Let's store the data we filter into a variable so we can easily see what's going on.
-            methCounter++
-            var data = $(this);
+  //          // Let's store the data we filter into a variable so we can easily see what's going on.
+  //           methCounter++
+  //           var data = $(this);
             
 
-            console.log(data.text());
-            var myDictionary = decisionObjects[index]
-            myDictionary["price"] = data.text()
+  //           console.log(data.text());
+  //           var myDictionary = decisionObjects[index]
+  //           myDictionary["price"] = data.text()
             
             
-            if(methCounter===(info.length))
-            {
-              res.send(decisionObjects)
-            }
-           // Once we have our title, we'll store it to the our json object.
+  //           if(methCounter===(info.length))
+  //           {
+  //             res.send(decisionObjects)
+  //           }
+  //          // Once we have our title, we'll store it to the our json object.
 
-           // json.title = title;
-      })
-    }
-  })
-      };
-      }
-  var myfunc = []
-  myfunc[0] = createfunc(i)
-  myfunc[0]();
+  //          // json.title = title;
+  //     })
+  //   }
+  // })
+  //     };
+  //     }
+  //var myfunc = []
+  //myfunc[0] = createfunc(i)
+  //myfunc[0]();
   
 
   
   }
+
+  res.send(decisionObjects)
 
   
   
@@ -642,8 +645,6 @@ app.put('/groups/:id/:number/finished', function(req, res, next) {
 })
 
 var port = Number(process.env.PORT || 5000);
-app.listen(port, function() {
-  console.log("Listening on " + port);
-});
+app.listen(port, function() {});
 
 
