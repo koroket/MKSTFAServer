@@ -487,10 +487,11 @@ Scrape
 */
 app.post('/scrape', function(req, res) {
 
-
+console.log("scraping started")
 
           request(req.body.url, function(error, response, html){
     if(!error){
+      console.log("scraping html started")
       var $ = cheerio.load(html);
 
       var title, release, rating;
