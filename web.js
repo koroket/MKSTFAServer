@@ -482,6 +482,64 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
   
 
 })
+/*
+Scrape
+*/
+app.post('/scrape', function(req, res) {
+
+
+
+          request(req.body.url, function(error, response, html){
+    if(!error){
+      var $ = cheerio.load(html);
+
+      var title, release, rating;
+      var json = { title : "", release : "", rating : ""};
+
+            // We'll use the unique header class as a starting point.
+      var methCounter = 0
+      var sendDict = {}
+      $('span.hour-range').filter(function(){
+
+           // Let's store the data we filter into a variable so we can easily see what's going on.
+            methCounter++
+            var data = $(this);
+
+
+            console.log(data.children().text())
+            sendDict["hour"] = data.children().text()
+            
+            
+            if(methCounter===2)
+            {
+              res.send(sendDict)
+            }
+           // Once we have our title, we'll store it to the our json object.
+
+           // json.title = title;
+      })
+      $('dd.nowrap.price-description').filter(function(){
+
+           // Let's store the data we filter into a variable so we can easily see what's going on.
+            methCounter++
+            var data = $(this);
+            
+
+            console.log(data.text());
+            sendDict["price"] = data.text()
+            
+            
+            if(methCounter===2)
+            {
+              res.send(sendDict)
+            }
+           // Once we have our title, we'll store it to the our json object.
+           // json.title = title;
+      })
+    }
+  })
+  
+})
 
 /*
  * GroupTableViewController - resetPeople
