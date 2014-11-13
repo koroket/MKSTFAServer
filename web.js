@@ -400,6 +400,10 @@ app.get('/yelp/:lat/:longi/:search/:offset', function(req, res) {
     {
       temp["rating"] = infoDictionary["rating"]
     }
+    if(("rating" in info[i]))
+    {
+      temp["url"] = infoDictionary["url"]
+    }
     decisionObjects.push(temp)
 
     url = infoDictionary["url"];
