@@ -501,7 +501,7 @@ console.log("scraping started")
       var methCounter = 0
       var sendDict = {}
       $('span.hour-range').filter(function(){
-
+            console.log("hour")
            // Let's store the data we filter into a variable so we can easily see what's going on.
             methCounter++
             var data = $(this);
@@ -520,7 +520,7 @@ console.log("scraping started")
            // json.title = title;
       })
       $('dd.nowrap.price-description').filter(function(){
-
+            console.log("price")
            // Let's store the data we filter into a variable so we can easily see what's going on.
             methCounter++
             var data = $(this);
